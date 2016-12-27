@@ -60,6 +60,30 @@ function BinarySearchTree() {
     }
 
     this.isBalanced = () => (this.findMinHeight() > this.findMaxHeight() - 1) ? false : true;
+
+    this.isBalancedOnce = function() {
+        let record = { min: null, max: null };
+        let depthFirst = (node = this.root, height = -1) => {
+            if (node == null) {
+                if (record.min == null) record.min = height;
+                if (record.max == null) record.max = height;
+                if (height < record.min) record.min = height;
+                if (height > record.max) record.max = height;
+                return;
+            };
+            height++;
+            depthFirst(node.left, height);
+            depthFirst(node.right, height);
+        };
+        depthFirst();
+        return (record.max > record.min + 1) ? false : true;
+    };
+
+    this.isSym = function(node = this.root) {
+        if (node.left == null && node.right == null) return true;
+        if (node.left == null || node.right == null) return false;
+        return this.isSym(node.left) && this.isSym(node.right);
+    };
     
     this.findMinHeight = function(node = this.root) {
         if (node == null) {
