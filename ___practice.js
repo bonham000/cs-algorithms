@@ -17,44 +17,69 @@ let R = [];
 })(8);
 
 
-var twoSum = function(nums, target) {
-    if (!Array.isArray(R) || R.length == 0) return null;
-    let result = [];
-    for (let a = 0; a < nums.length; a++) {
-    	result[0] = a;
-    	for (let b = a + 1; b < nums.length; b++) {
-    		if (nums[a] + nums[b] == target) {
-    			result[1] = b;
-    			return result;
-    		}
-    	}
+function LinkedList() { 
+  this.head = null; 
+  var Node = function(element) {
+    this.element = element; 
+    this.next = null; 
+  };
+  this.print = function()  {
+    let node = this.head;
+    let result = new String();
+    while (node.next != null) {
+      result += (node.element + ', ');
+      node = node.next;
     }
-    return [-1];
+    result += (node.element + '.');
+    console.log(result);
+  };
+  this.add = function(element) {
+    let node = this.head;
+    let newNode = new Node(element);
+    if (node == null) {
+      this.head = newNode;
+    } else {
+      while (node.next != null) {
+        node = node.next;
+      }
+      node.next = newNode;
+    }
+    length++;
+  };
 };
 
-function twoSum2(R, target) {
-	if (!Array.isArray(R) || R.length == 0) return null;
-  let ans = [-1];
-	let store = new Map();
-	R.forEach((v, i) => {
-		store.set(v, i);
-		let diff = target - v;
-		if (store.has(diff)) ans = [store.get(diff), i];
-	});
-	return ans;
+
+function addTwoNumbers(L1, L2) {
+	function intoNum(list) {
+		let N = [];
+		let node = list.head;
+		while (node != null) {
+			N.unshift(node.element);
+			node = node.next;
+		}
+		return N;
+	}
+	let num1 = intoNum(list1);
+	let num2 = intoNum(list2);
+	let sum = Number(num1.join('')) + Number(num2.join(''));
+	let list = new LinkedList();
+	sum.toString().split('').reverse().forEach(n => list.add(n));
+	return list;
 };
+
+
+
+let list1 = new LinkedList(); list1.add(2); list1.add(4); list1.add(3);
+let list2 = new LinkedList(); list2.add(5); list2.add(6); list2.add(4);
 
 // test code:
 console.clear();
 
-console.log(twoSum2([2,7,11,15], 9));
-console.log(twoSum2([2,10], 9));
-console.log(twoSum2({}, 9));
+console.log(addTwoNumbers(list1, list2));
 
-console.assert(twoSum2([2,7,11,15], 9).join('') == '01', 'The function returns the correct answer.');
-console.assert(twoSum2([5,5], 7), [-1], 'The function returns [-1] if the sum can\'t be achieved.');
-console.assert(twoSum2([], 10) == null, 'The function returns null when passed an empty array.');
-console.assert(twoSum2({}, 10) == null, 'The function returns null when not passed an array.');
+
+
+
 
 
 
