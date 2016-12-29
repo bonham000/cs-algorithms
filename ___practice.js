@@ -67,15 +67,36 @@ function addTwoNumbers(L1, L2) {
 	return list;
 };
 
+function addTwoNumbers2(L1, L2) {
+  let r = 0;
+  let node1 = L1.head;
+  let node2 = L2.head;
+  let sum = new LinkedList();
+  while (node1 != null && node2 != null) {
+    let add = node1.element + node2.element + r;
+    if (add > 9) {
+      r = add - 9;
+      add = 0;
+    } else {
+      r = 0;
+    };
+    sum.add(add);
+    node1 = node1.next;
+    node2 = node2.next;
+  };
+  if (r != 0) sum.add(r);
+  return sum.print();
+};
+
 
 
 let list1 = new LinkedList(); list1.add(2); list1.add(4); list1.add(3);
-let list2 = new LinkedList(); list2.add(5); list2.add(6); list2.add(4);
+let list2 = new LinkedList(); list2.add(5); list2.add(6); list2.add(8);
 
 // test code:
 console.clear();
 
-console.log(addTwoNumbers(list1, list2));
+console.log(addTwoNumbers2(list1, list2));
 
 
 
