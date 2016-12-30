@@ -1,28 +1,11 @@
-"use strict"
-
-// performance timer:
-const timeFn = (fn, args) => {
-	let timeStart = performance.now();
-	let result = fn(args);
-	let timeEnd = performance.now();
-	console.log(`${fn.prototype.constructor.name} took ${(timeEnd - timeStart).toFixed(6) * 1000} microseconds to run and returned:`);
-	console.log(result);
-};
-
-// generate a random array:
-let R = [];
-(function gen(n) {
-	while (R.length < n) R.push(+(Math.random() * 100).toFixed());
-	return R;
-})(8);
-
+// find a needle substring in a haystack, or
+// return -1 if it is not present
 var strStr = function(haystack, needle) {
   if (needle.length > haystack.length) return -1;
   if (haystack == '' && needle == '') return 0;
   if (needle == '') return 0;
   let cp = 0;
   let flag = null;
-
   for (let i = 0; i < haystack.length; i++) {
     if (haystack.length - i < needle.length && cp == 0) return - 1;
     if (haystack[i] == needle[cp]) {
@@ -39,7 +22,7 @@ var strStr = function(haystack, needle) {
   };
   return -1;
 };
-
+// another version
 var strStr = function(haystack, needle) {
   if (needle.length > haystack.length) return -1;
   if (haystack == '' && needle == '') return 0;
@@ -58,15 +41,3 @@ var strStr = function(haystack, needle) {
   };
   return -1;
 };
-
-
-// test code:
-console.clear();
-console.log(strStr('aaa', 'a'));
-console.log(strStr('mississippi', 'sippj'));
-console.log(strStr('mississippi', 'pi'));
-console.log(strStr('aaa', 'aaa'));
-
-
-
-
