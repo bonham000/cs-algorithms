@@ -16,12 +16,30 @@ let R = [];
 	return R;
 })(8);
 
-
+var isValid = function(s) {
+  if (s.length % 2 != 0) return false;
+  let O = [];
+  for (let i = 0; i < s.length; i++) {
+      let char = s[i];
+      if (char == '(' || char == '[' || char == '{' ) {
+          O.push(char);
+      } else {
+          let cp = O[O.length - 1];
+          if (cp == '(' && char != ')' || cp == '[' && char != ']' || cp == '{' && char != '}') {
+            return false;
+          } else {
+            O.pop();
+          };
+      };
+  };
+  return (O.length > 0) ? false : true;
+};
 
 // test code:
 console.clear();
 
-
+console.log(isValid(']'));
+//console.log(isValid('((('));
 
 
 
