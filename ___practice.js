@@ -16,56 +16,25 @@ let R = [];
 	return R;
 })(8);
 
-var strStr = function(haystack, needle) {
-  if (needle.length > haystack.length) return -1;
-  if (haystack == '' && needle == '') return 0;
-  if (needle == '') return 0;
-  let cp = 0;
-  let flag = null;
-
-  for (let i = 0; i < haystack.length; i++) {
-    if (haystack.length - i < needle.length && cp == 0) return - 1;
-    if (haystack[i] == needle[cp]) {
-      if (cp == needle.length - 1) return (i - cp);
-      if (haystack[i] == needle[0] && cp !== 0) flag = i;
-      cp++;
-    } else if (haystack[i] != needle[cp] && flag != null) {
-      i = flag - 1;
-      flag = null;
-      cp = 0;
-    } else if (haystack[i] == needle[0] && cp !== 0) {
-      cp = 1;
+var reverse = function(x) {
+    let sign = false;
+    x = x.toString();
+    if (x[0] === '-') {
+        sign = true;
+        x = x.toString().slice(1);
     };
-  };
-  return -1;
-};
-
-var strStr = function(haystack, needle) {
-  if (needle.length > haystack.length) return -1;
-  if (haystack == '' && needle == '') return 0;
-  if (needle == '') return 0;
-  for (let a = 0; a < haystack.length; a++) {
-    if (haystack.length - a < needle.length) return - 1;
-    if (haystack[a] == needle[0]) {
-      for (let b = 0; b < needle.length; b++) {
-        if (haystack[a + b] != needle[b]) {
-          break;
-        } else if (b == needle.length - 1) {
-          return a;
-        };
-      };
-    };
-  };
-  return -1;
+    let ans = x.split('').reverse().join('');
+    return (sign) ? Number(ans) * -1 : Number(ans);
 };
 
 
 // test code:
 console.clear();
-console.log(strStr('aaa', 'a'));
-console.log(strStr('mississippi', 'sippj'));
-console.log(strStr('mississippi', 'pi'));
-console.log(strStr('aaa', 'aaa'));
+console.log(reverse(-1534236469));
+
+
+
+
 
 
 
