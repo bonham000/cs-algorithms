@@ -1,5 +1,6 @@
 document.write(`
-<b>Title:</b> TITLE`)
+<b>Title:</b> TITLE
+`)
 
 document.write(`<br><br>
 <b>Description:</b> DESCRIPTION
