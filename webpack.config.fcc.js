@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-	entry: './__challenge__seed.js',
+	entry: './__challenge__dev.js',
 	output: {
 		filename: 'bundle.js'
 	},
