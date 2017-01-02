@@ -32,21 +32,14 @@ let nestedObject = {
 		online: 42
 	}
 };
+// change code below this line
 
 // SOLUTION CODE
 nestedObject.data.online = 45;
 
-
-
-
-// TAIL CODE
-
-
-
-
 // TESTS
 console.clear();
-console.log(nestedObject)
+
 console.assert('id' in nestedObject && 'date' in nestedObject && 'data' in nestedObject, 'nestedObject has id, date and data properities.');
 console.assert('totalUsers' in nestedObject.data && 'online' in nestedObject.data, 'nestedObject has a data key set to an object with keys totalUsers and online.');
 console.assert(nestedObject.data.online === 45, 'The online property nested in the data key of nestedObject should be set to 45.');

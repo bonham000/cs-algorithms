@@ -46,14 +46,9 @@ foods.bananas = 13;
 foods.grapes = 35;
 foods.strawberries = 27;
 
-// TAIL CODE
-
-
-
-
 // TESTS
 console.clear();
-console.log(foods);
+
 console.assert(typeof foods === 'object', 'foods is an object');
 console.assert(foods.bananas === 13, 'The foods object has a key \'bananas\' with a value of 13.');
 console.assert(foods.grapes === 35, 'The foods object has a key \'grapes\' with a value of 35.');
