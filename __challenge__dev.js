@@ -1,25 +1,21 @@
 document.write(`
-<b>Title:</b> Access Property Names with Bracket Notation
+<b>Title:</b> Use the Delete Keyword to Remove Object Properties
 `)
 
 document.write(`<br><br>
-<b>Description:</b> In the first challenge we mentioned the use of bracket notation as a way access properties values using the evaluation of a variable.
-For instance, if you recall our <code>foods</code> object from that challenge, imagine that this object is being used in a program for a supermarket cash register.
-We have some function that sets the <code>selectedFood</code> and we want to check our <code>foods</code> object for the presence of that food. This might look like:<br>
+<b>Description:</b> Now you know what objects are and their basic features and advantages. In short, they are a key-value store which provide a flexible, intuitive
+way to structure data and they provide very fast lookup time. For the rest of these challenges we will describe several common operations you can perform on objects
+so you can become comfortable applying these useful data structures in your programs.<br><br>
 
-<pre>
-<code>let selectedFood = getCurrentFood(scannedItem);
-let inventory = foods[selectedFood];</code>
-</pre>
+Previously, we added and modified key-value pairs to objects. Here we will see how we can remove a key-value pair from an object. If we wanted to remove the 
+<code>apples</code> key from our <code>foods</code> object from before, we could remove it by using the <code>delete</code> keyword like this:<br><br>
 
-This code will evaluate the value stored in the <code>selectedFood</code> variable and return the value of that key in the <code>foods</code> object, or
-<code>undefined</code> if it is not present. Bracket notation is very useful because sometime object properties are not known before runtime or we need to access
-them in a more dynamic way.
+<code>delete foods.apples;</code>
 `);
 
 document.write(`<br><br>
-<b>Instructions:</b> In the example code we've defined a function <code>checkInventory</code> which receives a scanned item as an argument. Return the current value
-of the <code>scannedItem</code> key in the <code>foods</code> object. You can assume that only valid keys will be provided as an argument to <code>checkInventory</code>.
+<b>Instructions:</b> Use the <code>delete</code> keyword to remove the <code>oranges</code>, <code>plums</code>, and <code>strawberries</code> keys
+from the <code>foods</code> object.
 `);
 
 // SEED CODE
@@ -31,12 +27,7 @@ of the <code>scannedItem</code> key in the <code>foods</code> object. You can as
 // 	grapes: 35,
 // 	strawberries: 27
 // };
-
-// function checkInventory(scannedItem) {
-// 	// change code below this line
-
-// 	// change code above this line
-// };
+// change code below this line
 
 // SOLUTION CODE
 let foods = {
@@ -48,15 +39,11 @@ let foods = {
 	strawberries: 27
 };
 
-function checkInventory(scannedItem) {
-	return foods[scannedItem];
-};
+delete foods.oranges;
+delete foods.plums;
+delete foods.bananas;
 
 // TESTS
 console.clear();
 
-console.assert(typeof checkInventory === 'function', 'checkInventory is a function');
-console.assert('apples' in foods && 'oranges' in foods && 'plums' in foods && 'bananas' in foods && 'grapes' in foods && 'strawberries' in foods, 'The foods object contains the following keys: apples, oranges, plums, bananas, grapes, and strawberries.');
-console.assert(checkInventory('apples') === 25 && checkInventory('bananas') === 13 && checkInventory('strawberries') === 27, 'The checkInventory function returns the value of the scannedItem argument in the foods object.');
-
-
+console.assert(!foods.hasOwnProperty('oranges') && !foods.hasOwnProperty('plums') && !foods.hasOwnProperty('bananas') && Object.keys(foods).length === 3, 'The foods object only has three keys: apples, grapes, and strawberries.');
