@@ -47,8 +47,6 @@ function countOnline(obj) {
 	// change code above this line
 };
 
-countOnline(users);
-
 // SOLUTION CODE
 let users = {
 	Alan: {
@@ -74,8 +72,6 @@ function countOnline(obj) {
 	for (let user in obj) if (obj[user].online) n++;
 	return n;
 };
-
-countOnline(users);
 
 // TESTS
 console.clear();

@@ -2,7 +2,8 @@ document.write(`
 <b>Title:</b> Generate an Array of All Object Keys with Object.keys()
 `)
 
-document.write(`<br><br>We can also generate an array which contains all the keys stored in an object using the <code>Object.keys()</code> method and
+document.write(`<br><br>
+<b>Description:</b> We can also generate an array which contains all the keys stored in an object using the <code>Object.keys()</code> method and
 passing in an object as the argument. This will return an array with strings representing each property in the object. Again, there will be no specific
 order to the entries in the array.
 `);
@@ -38,8 +39,6 @@ function getArrayOfUsers(obj) {
 	// change code above this line
 };
 
-getArrayOfUsers(users);
-
 // SOLUTION CODE
 let users = {
 	Alan: {
@@ -63,8 +62,6 @@ let users = {
 function getArrayOfUsers(obj) {
 	return Object.keys(obj);
 };
-
-getArrayOfUsers(users);
 
 // TESTS
 console.clear();

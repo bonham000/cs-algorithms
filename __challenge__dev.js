@@ -1,53 +1,42 @@
 document.write(`
-<b>Title:</b> Iterate Through the Keys of an Object with a for...in Statement
+<b>Title:</b> Generate an Array of All Object Keys with Object.keys()
 `)
 
-document.write(`<br><br>
-<b>Description:</b> Sometimes you may need to iterate through all the keys within an object. This requires a specific syntax in JavaScript called a for...in statement.
-For our <code>users</code> object from the last challenge, this could look like:<br>
-
-<pre>
-<code>for (let user in users) {
- console.log(user);
-};</code>
-</pre>
-
-In this statement we define a variable <code>user</code>. This variable will be set to the key in each iteration as the statement loops through the keys in the object.
-Running this code would print the name of each user to the console. Note that objects do not maintain an ordering to stored keys like arrays do.
+document.write(`<br><br>We can also generate an array which contains all the keys stored in an object using the <code>Object.keys()</code> method and
+passing in an object as the argument. This will return an array with strings representing each property in the object. Again, there will be no specific
+order to the entries in the array.
 `);
 
 document.write(`<br><br>
-<b>Instructions:</b> We've defined a function <code>countOnline</code> that should return the number of users with the online property set to <code>true</code>. Use
-a for...in statement within this function to loop through the users in the users object and return the number of users whose online property is set to <code>true</code>.
+<b>Instructions:</b> Finish writing the <code>getArrayOfUsers</code> function so that it returns an array containing all the properties in the object
+it receives as an argument.
 `);
 
 // SEED CODE
-// let users = {
-// 	Alan: {
-// 		age: 27,
-// 		online: false
-// 	},
-// 	Jeff: {
-// 		age: 32,
-// 		online: true
-// 	},
-// 	Sarah: {
-// 		age: 48,
-// 		online: false
-// 	},
-// 	Ryan: {
-// 		age: 19,
-// 		online: true
-// 	}
-// };
+let users = {
+	Alan: {
+		age: 27,
+		online: false
+	},
+	Jeff: {
+		age: 32,
+		online: true
+	},
+	Sarah: {
+		age: 48,
+		online: false
+	},
+	Ryan: {
+		age: 19,
+		online: true
+	}
+};
 
-// function countOnline(obj) {
-// 	// change code below this line
+function getArrayOfUsers(obj) {
+	// change code below this line
 
-// 	// change code above this line
-// };
-
-countOnline(users);
+	// change code above this line
+};
 
 // SOLUTION CODE
 let users = {
@@ -69,19 +58,14 @@ let users = {
 	}
 };
 
-function countOnline(obj) { 
-	let n = 0;
-	for (let user in obj) if (obj[user].online) n++;
-	return n;
+function getArrayOfUsers(obj) {
+	return Object.keys(obj);
 };
-
-countOnline(users);
 
 // TESTS
 console.clear();
 
-console.assert(users.Alan.online === false && users.Jeff.online === true &&  users.Sarah.online === false &&  users.Ryan.online === true, 'The users object contains users Jeff and Ryan with online set to true and users Alan and Sarah with online set to false.');
-console.assert((function() { users.Harry = {online: true}; users.Sam = {online: true}; users.Carl = {online: true}; return countOnline(users) })() === 5, 'The function countOnline returns the number of users with the online property set to true.');
-
+console.assert('Alan' in users && 'Jeff' in users && 'Sarah' in users && 'Ryan' in users && Object.keys(users).length === 4, 'The users object only contains the keys Alan, Jeff, Sarah, and Ryan.');
+console.assert((function() { users.Sam = {}; users.Lewis = {}; let R = getArrayOfUsers(users); return (R.indexOf('Alan') !== -1 && R.indexOf('Jeff') !== -1 && R.indexOf('Sarah') !== -1 && R.indexOf('Ryan') !== -1 && R.indexOf('Sam') !== -1 && R.indexOf('Lewis') !== -1); })() === true, 'The getArrayOfUsers function returns an array which contains all the keys in the users array.');
 
 
