@@ -1,45 +1,42 @@
 document.write(`
-<b>Title:</b> Modify an Object Nested within an Object
+<b>Title:</b> Use the Delete Keyword to Remove Object Properties
 `)
 
 document.write(`<br><br>
-<b>Description:</b> Objects, and other similar key-value pair data structures, offer some very useful benefits. One clear benefit is that they allow us to
-structure our data in an intuitive way. They are also very flexible. For instance, you can have properties nested to an arbitrary depth, a key can store an
-array, or another object. Objects are also the foundation for JavaScript Object Notation, JSON, which is a widely used method of sending data
-across the web. <br><br>
+<b>Description:</b> Now you know what objects are and their basic features and advantages. In short, they are a key-value store which provides a flexible, intuitive
+way to store data and they provide very fast lookup time. For the rest of these challenges we will describe several common operations you can perform on objects
+so you can become comfortable applying these useful data structures in your programs.<br><br>
 
-Another powerful advantage of key-value pair data structures is constant lookup time. What we mean by this is when you request the value of a specific
-property you will get the value back in the same amount of time regardless of the number of entries in the object. If you had an object with 5 entries or one
-that held a collection of 1,000,000 entries you could still retrieve property values or check if a key exists in the same amount of time.<br><br>
+Previously, we added and modified key-value pairs to objects. Here we will see how we can remove a key-value pair from an object. If we wanted to remove the 
+<code>apples</code> key from our <code>foods</code> object from before, we could remove it by using the <code>delete</code> keyword like this:<br><br>
 
-The reason for this fast lookup time is that internally the object is storing
-properties using some type of <i>hashing mechanism</i> which allows it to know exactly where it has stored different property values. If you want to learn more
-about this please take a look at the optional Advanced Data Structures challenges. All you should remember for now is that objects
-provide very performant access to stored data and this makes them a great tool to work with.
+<code>delete foods.apples;</code>
 `);
 
 document.write(`<br><br>
-<b>Instructions:</b> Here we've written an object <code>nestedObject</code> which includes another object nested within it. You can modify properties on this nested
-object in the same way you modified properties in the last challenge. Set the value of the <code>online</code> key to <code>45</code>.
+<b>Instructions:</b> Use the <code>delete</code> keyword to remove the <code>oranges</code>, <code>plums</code>, and <code>strawberries</code> keys
+from the <code>foods</code> object.
 `);
 
 // SEED CODE
-let nestedObject = {
-	id: 23894201352,
-	date: 'January 1, 2017',
-	data: {
-		totalUsers: 51,
-		online: 42
-	}
+let foods = {
+	apples: 25,
+	oranges: 32,
+	plums: 28,
+	bananas: 13,
+	grapes: 35,
+	strawberries: 27
 };
 // change code below this line
 
 // SOLUTION CODE
-nestedObject.data.online = 45;
+delete foods.oranges;
+delete foods.plums;
+delete foods.bananas;
 
 // TESTS
 console.clear();
 
-console.assert('id' in nestedObject && 'date' in nestedObject && 'data' in nestedObject, 'nestedObject has id, date and data properities.');
-console.assert('totalUsers' in nestedObject.data && 'online' in nestedObject.data, 'nestedObject has a data key set to an object with keys totalUsers and online.');
-console.assert(nestedObject.data.online === 45, 'The online property nested in the data key of nestedObject should be set to 45.');
+console.log(foods);
+
+console.assert(!foods.hasOwnProperty('oranges') && !foods.hasOwnProperty('plums') && !foods.hasOwnProperty('bananas') && Object.keys(foods).length === 3, 'The foods object only has three keys: apples, grapes, and strawberries.');
