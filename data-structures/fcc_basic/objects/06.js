@@ -12,13 +12,13 @@ For our <code>users</code> object from the last challenge, this could look like:
 };</code>
 </pre>
 
-In this statement we define a variable <code>user</code>. This variable will be set to the key in each iteration as the statement loops through the keys in the object.
+In this statement, we define a variable <code>user</code>. This variable will be set to the key in each iteration as the statement loops through the keys in the object.
 Running this code would print the name of each user to the console. Note that objects do not maintain an ordering to stored keys like arrays do.
 `);
 
 document.write(`<br><br>
-<b>Instructions:</b> We've defined a function <code>countOnline</code> that should return the number of users with the online property set to true. Use a for...in
-statement within this function to loop through the users in the users object and return the number of users whose online property is set to <code>true</code>.
+<b>Instructions:</b> We've defined a function <code>countOnline</code> that should return the number of users with the online property set to <code>true</code>. Use
+a <code>for...in</code> statement within this function to loop through the users in the users object and return the number of users whose online property is set to <code>true</code>.
 `);
 
 // SEED CODE
@@ -71,9 +71,7 @@ let users = {
 
 function countOnline(obj) { 
 	let n = 0;
-	for (let user in obj) {
-		if (obj[user].online) n++;
-	};
+	for (let user in obj) if (obj[user].online) n++;
 	return n;
 };
 
