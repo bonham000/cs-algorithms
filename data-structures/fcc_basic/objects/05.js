@@ -81,7 +81,7 @@ isEveryoneHere(users);
 // TESTS
 console.clear();
 
-console.assert('Alan' in users && 'Jeff' in users && 'Sarah' in users && 'Ryan' in users, 'The users object has the keys Alan, Jeff, Sarah, and Ryan.');
+console.assert('Alan' in users && 'Jeff' in users && 'Sarah' in users && 'Ryan' in users && Object.keys(users).length === 4, 'The users object only contains the keys Alan, Jeff, Sarah, and Ryan.');
 console.assert(isEveryoneHere(users) === true, 'The function isEveryoneHere returns true if Alan, Jeff, Sarah, and Ryan are properties on the users object');
 console.assert((function() { delete users.Alan; delete users.Jeff; delete users.Sarah; delete users.Ryan; return isEveryoneHere(users) })() === false, 'The function isEveryoneHere returns false if Alan, Jeff, Sarah, and Ryan are not keys on the users object.');
 
