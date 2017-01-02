@@ -7,11 +7,11 @@ document.write(`<br><br>
 provides two different ways to do this. One uses the <code>hasOwnProperty</code> method on the object and the other uses the <code>in</code> keyword.
 If we have an object <code>users</code> with a property of <code>Alan</code>, we could check for its presence in either of the following ways:<br><br>
 
-<code>user.hasOwnProperty('Alan');</code>
+<code>users.hasOwnProperty('Alan');</code>
 
 <br><br>
 
-<code>'Alan' in user;</code>
+<code>'Alan' in users;</code>
 
 <br><br>
 
@@ -24,7 +24,7 @@ document.write(`<br><br>
 contains all four names, Alan, Jeff, Sarah, and Ryan, as keys, and <code>false</code> otherwise.
 `);
 
-// SEED CODE
+SEED CODE
 let users = {
 	Alan: {
 		age: 27,
