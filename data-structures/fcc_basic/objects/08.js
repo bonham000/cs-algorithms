@@ -3,7 +3,7 @@ document.write(`
 `)
 
 document.write(`<br><br>
-<b>Description:</b> Now you've seen all the basic operations for JavaScript objects. You can add, modify, and remove key-value pairs, check if keys exists, and
+<b>Description:</b> Now you've seen all the basic operations for JavaScript objects. You can add, modify, and remove key-value pairs, check if keys exist, and
 iterate over all the keys in an object. As you continue learning JavaScript you will see even more versatile applications of objects. Additionally, the
 optional Advanced Data Structures lessons later in the curriculum also cover the ES6 <code>Map</code> and <code>Set</code> objects, both of which are similar
 to ordinary objects but provide some additional features. Now that you've learned the basic of arrays and objects, you're ready to put this knowledge to use
@@ -12,7 +12,9 @@ solving some algorithms!
 
 document.write(`<br><br>
 <b>Instructions:</b> Take a look at the object we've provided in the code editor. The <code>user</code> object contins three keys. The <code>data</code> key
-contains two object keys, one of which contains an array of friends. From this you can see how flexible objects are as data structures. 
+contains four keys, one of which contains an array of friends. From this you can see how flexible objects are as data structures. We've started writing a
+function <code>addFriend</code>. Finish writing it so that it takes a <code>user</code> object and adds the name of the <code>friend</code> argument to
+the array stored in <code>user.data.friends</code>.
 `);
 
 // SEED CODE
