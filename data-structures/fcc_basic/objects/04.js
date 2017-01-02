@@ -1,69 +1,42 @@
 document.write(`
-<b>Title:</b> Check if an Object has a Key
+<b>Title:</b> Use the Delete Keyword to Remove Object Properties
 `)
 
 document.write(`<br><br>
-<b>Description:</b> Now we can add, modify, and remove keys from objects. But what if we just wanted to know if an object has a specific property? JavaScript
-provides two different ways to do this. One uses the <code>hasOwnProperty</code> method on the object and the other uses the <code>in</code> keyword.
-If we have an object <code>users</code> with a property of <code>Alan</code>, we could check for its presence in either of the following ways:<br><br>
+<b>Description:</b> Now you know what objects are and their basic features and advantages. In short, they are a key-value store which provides a flexible, intuitive
+way to store data and they provide very fast lookup time. For the rest of these challenges we will describe several common operations you can perform on objects
+so you can become comfortable applying these useful data structures in your programs.<br><br>
 
-<code>user.hasOwnProperty('Alan');</code>
+Previously, we added and modified key-value pairs to objects. Here we will see how we can remove a key-value pair from an object. If we wanted to remove the 
+<code>apples</code> key from our <code>foods</code> object from before, we could remove it by using the <code>delete</code> keyword like this:<br><br>
 
-<br><br>
-
-<code>'Alan' in user;</code>
-
-<br><br>
-
-<code>// both return true</code>
+<code>delete foods.apples;</code>
 `);
 
 document.write(`<br><br>
-<b>Instructions:</b> We've created a <code>users</code> object here with some users in it and a function <code>isEveryoneHere</code> which we pass the
-<code>users</code> object to as an argument. Finish writing this function so that it returns <code>true</code> only if the <code>users</code> object
-contains all four names, Alan, Jeff, Sarah, and Ryan, as keys, and <code>false</code> otherwise.
+<b>Instructions:</b> Use the <code>delete</code> keyword to remove the <code>oranges</code>, <code>plums</code>, and <code>strawberries</code> keys
+from the <code>foods</code> object.
 `);
 
 // SEED CODE
-let users = {
-	Alan: {
-		age: 27,
-		online: true
-	},
-	Jeff: {
-		age: 32,
-		online: true
-	},
-	Sarah: {
-		age: 48,
-		online: true
-	},
-	Ryan: {
-		age: 19,
-		online: true
-	}
+let foods = {
+	apples: 25,
+	oranges: 32,
+	plums: 28,
+	bananas: 13,
+	grapes: 35,
+	strawberries: 27
 };
-
-function isEveryoneHere(obj) {
-	// change code below this line
-
-	// change code above this line
-};
-
-isEveryoneHere(users);
+// change code below this line
 
 // SOLUTION CODE
-function isEveryoneHere(obj) { 
-	return ('Alan' in users && 'Jeff' in users && 'Sarah' in users && 'Ryan' in users) ? true : false;
-};
-
-isEveryoneHere(users);
+delete foods.oranges;
+delete foods.plums;
+delete foods.bananas;
 
 // TESTS
 console.clear();
-console.assert('Alan' in users && 'Jeff' in users && 'Sarah' in users && 'Ryan' in users, 'The users object has the keys Alan, Jeff, Sarah, and Ryan.');
-console.assert(isEveryoneHere(users) === true, 'The function isEveryoneHere returns true if Alan, Jeff, Sarah, and Ryan are properties on the users object');
-console.assert((function() { delete users.Alan; delete users.Jeff; delete users.Sarah; delete users.Ryan; return isEveryoneHere(users) })() === false, 'The function isEveryoneHere returns false if Alan, Jeff, Sarah, and Ryan are not keys on the users object.');
 
+console.log(foods);
 
-
+console.assert(!foods.hasOwnProperty('oranges') && !foods.hasOwnProperty('plums') && !foods.hasOwnProperty('bananas') && Object.keys(foods).length === 3, 'The foods object only has three keys: apples, grapes, and strawberries.');
