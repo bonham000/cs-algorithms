@@ -50,6 +50,25 @@ function countOnline(obj) {
 countOnline(users);
 
 // SOLUTION CODE
+let users = {
+	Alan: {
+		age: 27,
+		online: false
+	},
+	Jeff: {
+		age: 32,
+		online: true
+	},
+	Sarah: {
+		age: 48,
+		online: false
+	},
+	Ryan: {
+		age: 19,
+		online: true
+	}
+};
+
 function countOnline(obj) { 
 	let n = 0;
 	for (let user in obj) {
@@ -62,7 +81,6 @@ countOnline(users);
 
 // TESTS
 console.clear();
-console.log(countOnline(users));
 
 console.assert(users.Alan.online === false && users.Jeff.online === true &&  users.Sarah.online === false &&  users.Ryan.online === true, 'The users object contains users Jeff and Ryan with online set to true and users Alan and Sarah with online set to false.');
 console.assert((function() { users.Harry = {online: true}; users.Sam = {online: true}; users.Carl = {online: true}; return countOnline(users) })() === 5, 'The function countOnline returns the number of users with the online property set to true.');

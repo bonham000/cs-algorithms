@@ -30,13 +30,20 @@ let foods = {
 // change code below this line
 
 // SOLUTION CODE
+let foods = {
+	apples: 25,
+	oranges: 32,
+	plums: 28,
+	bananas: 13,
+	grapes: 35,
+	strawberries: 27
+};
+
 delete foods.oranges;
 delete foods.plums;
 delete foods.bananas;
 
 // TESTS
 console.clear();
-
-console.log(foods);
 
 console.assert(!foods.hasOwnProperty('oranges') && !foods.hasOwnProperty('plums') && !foods.hasOwnProperty('bananas') && Object.keys(foods).length === 3, 'The foods object only has three keys: apples, grapes, and strawberries.');

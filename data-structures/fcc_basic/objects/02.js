@@ -35,6 +35,15 @@ let nestedObject = {
 // change code below this line
 
 // SOLUTION CODE
+let nestedObject = {
+	id: 23894201352,
+	date: 'January 1, 2017',
+	data: {
+		totalUsers: 51,
+		online: 42
+	}
+};
+
 nestedObject.data.online = 45;
 
 // TESTS
