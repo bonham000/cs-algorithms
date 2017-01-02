@@ -13,13 +13,13 @@ let inventory = foods[selectedFood];</code>
 </pre>
 
 This code will evaluate the value stored in the <code>selectedFood</code> variable and return the value of that key in the <code>foods</code> object, or
-<code>undefined</code> if it is not present. Braket notation is very useful because sometime object properties are not known before runtime or we need to access
+<code>undefined</code> if it is not present. Bracket notation is very useful because sometime object properties are not known before runtime or we need to access
 them in a more dynamic way.
 `);
 
 document.write(`<br><br>
 <b>Instructions:</b> In the example code we've defined a function <code>checkInventory</code> which receives a scanned item as an argument. Return the current value
-of the <code>scannedItem</code> key in the <code>foods</code> object. Assume that only valid keys will be provided as an argument to <code>checkInventory</code>.
+of the <code>scannedItem</code> key in the <code>foods</code> object. You can assume that only valid keys will be provided as an argument to <code>checkInventory</code>.
 `);
 
 // SEED CODE
@@ -56,6 +56,7 @@ function checkInventory(scannedItem) {
 console.clear();
 
 console.assert(typeof checkInventory === 'function', 'checkInventory is a function');
+console.assert('apples' in foods && 'oranges' in foods && 'plums' in foods && 'bananas' in foods && 'grapes' in foods && 'strawberries' in foods, 'The foods object contains the following keys: apples, oranges, plums, bananas, grapes, and strawberries.');
 console.assert(checkInventory('apples') === 25 && checkInventory('bananas') === 13 && checkInventory('strawberries') === 27, 'The checkInventory function returns the value of the scannedItem argument in the foods object.');
 
 

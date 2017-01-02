@@ -1,54 +1,62 @@
 document.write(`
-<b>Title:</b> Modify an Object Nested Within an Object
+<b>Title:</b> Access Property Names with Bracket Notation
 `)
 
 document.write(`<br><br>
-<b>Description:</b> Objects, and other similar key-value pair data structures, offer some very useful benefits. One clear benefit is that they allow us to
-structure our data in an intuitive way. They are also very flexible. For instance, you can have properties nested to an arbitrary depth. Values can also be
-anything, for example a key can store an array, or even another object. Objects are also the foundation for JavaScript Object Notation, JSON, which is a widely used method of sending data
-across the web. <br><br>
+<b>Description:</b> In the first challenge we mentioned the use of bracket notation as a way access properties values using the evaluation of a variable.
+For instance, if you recall our <code>foods</code> object from that challenge, imagine that this object is being used in a program for a supermarket cash register.
+We have some function that sets the <code>selectedFood</code> and we want to check our <code>foods</code> object for the presence of that food. This might look like:<br>
 
-Another powerful advantage of key-value pair data structures is constant lookup time. What we mean by this is when you request the value of a specific
-property you will get the value back in the same amount of time (theoretically) regardless of the number of entries in the object. If you had an object with 5 entries or one
-that held a collection of 1,000,000 entries you could still retrieve property values or check if a key exists in the same amount of time.<br><br>
+<pre>
+<code>let selectedFood = getCurrentFood(scannedItem);
+let inventory = foods[selectedFood];</code>
+</pre>
 
-The reason for this fast lookup time is that internally the object is storing
-properties using some type of <i>hashing mechanism</i> which allows it to know exactly where it has stored different property values. If you want to learn more
-about this please take a look at the optional Advanced Data Structures challenges. All you should remember for now is that performant access to flexibly
-structured data make key-value stores very attractive data structures useful in a wide variety of settings.
+This code will evaluate the value stored in the <code>selectedFood</code> variable and return the value of that key in the <code>foods</code> object, or
+<code>undefined</code> if it is not present. Bracket notation is very useful because sometime object properties are not known before runtime or we need to access
+them in a more dynamic way.
 `);
 
 document.write(`<br><br>
-<b>Instructions:</b> Here we've written an object <code>nestedObject</code> which includes another object nested within it. You can modify properties on this nested
-object in the same way you modified properties in the last challenge. Set the value of the <code>online</code> key to <code>45</code>.
+<b>Instructions:</b> In the example code we've defined a function <code>checkInventory</code> which receives a scanned item as an argument. Return the current value
+of the <code>scannedItem</code> key in the <code>foods</code> object. You can assume that only valid keys will be provided as an argument to <code>checkInventory</code>.
 `);
 
 // SEED CODE
-// let nestedObject = {
-// 	id: 23894201352,
-// 	date: 'January 1, 2017',
-// 	data: {
-// 		totalUsers: 51,
-// 		online: 42
-// 	}
+// let foods = {
+// 	apples: 25,
+// 	oranges: 32,
+// 	plums: 28,
+// 	bananas: 13,
+// 	grapes: 35,
+// 	strawberries: 27
 // };
-// change code below this line
+
+// function checkInventory(scannedItem) {
+// 	// change code below this line
+
+// 	// change code above this line
+// };
 
 // SOLUTION CODE
-let nestedObject = {
-	id: 23894201352,
-	date: 'January 1, 2017',
-	data: {
-		totalUsers: 51,
-		online: 42
-	}
+let foods = {
+	apples: 25,
+	oranges: 32,
+	plums: 28,
+	bananas: 13,
+	grapes: 35,
+	strawberries: 27
 };
 
-nestedObject.data.online = 45;
+function checkInventory(scannedItem) {
+	return foods[scannedItem];
+};
 
 // TESTS
 console.clear();
 
-console.assert('id' in nestedObject && 'date' in nestedObject && 'data' in nestedObject, 'nestedObject has id, date and data properties.');
-console.assert('totalUsers' in nestedObject.data && 'online' in nestedObject.data, 'nestedObject has a data key set to an object with keys totalUsers and online.');
-console.assert(nestedObject.data.online === 45, 'The online property nested in the data key of nestedObject should be set to 45.');
+console.assert(typeof checkInventory === 'function', 'checkInventory is a function');
+console.assert('apples' in foods && 'oranges' in foods && 'plums' in foods && 'bananas' in foods && 'grapes' in foods && 'strawberries' in foods, 'The foods object contains the following keys: apples, oranges, plums, bananas, grapes, and strawberries.');
+console.assert(checkInventory('apples') === 25 && checkInventory('bananas') === 13 && checkInventory('strawberries') === 27, 'The checkInventory function returns the value of the scannedItem argument in the foods object.');
+
+
