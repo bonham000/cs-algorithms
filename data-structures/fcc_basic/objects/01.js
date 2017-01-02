@@ -3,13 +3,13 @@ document.write(`
 `)
 
 document.write(`<br><br>
-<b>Description:</b> The next data structure we will disucss is the JavaScript <code>object</code>. Objects are a very fundamental part of JavaScript,
+<b>Description:</b> The next data structure we will discuss is the JavaScript <code>object</code>. Objects are a very fundamental part of JavaScript,
 in fact, you may have heard this line before: 'In JavaScript, everything is an object.' While an understanding of objects is important to understand the
-inner workings of JavaScript functions or JavaScript's object oriented capabilities, here we will confine our discussion to the use of
+inner workings of JavaScript functions or JavaScript's object-oriented capabilities, here we will confine our discussion to the use of
 JavaScript objects as <code>key-value</code> pair data structures.<br><br>
 
-This type of data structure goes by different names depending on the language you are using and the specific details. The terms <i>dictionary</i>,
-<i>map</i>, and <i>hash table</i> all refer to the notion of a data structure in which specific keys, or properties are mapped to specific values.
+Key-value pair data structure go by different names depending on the language you are using and the specific details of the data structure. The terms <i>dictionary</i>,
+<i>map</i>, and <i>hash table</i> all refer to the notion of a data structure in which specific <i>keys</i>, or <i>properties</i> are mapped to specific <i>values</i>.
 For instance, consider the following:<br>
 
 <pre>
@@ -21,11 +21,10 @@ For instance, consider the following:<br>
 };</code>
 </pre>
 
-We've just defined an object called <code>FCC_User</code> with four <i>properties</i> each of which map to a specific value. If you wanted to know the
-number of followers <code>FCC_User</code> has, you could access that property by writing <code>FCC_User.followers</code>. This is called dot notation,
-you could also access the property with brackets, like so: <code>FCC_User['followers']</code>. Notice with the bracket notation we enclosed 
-<code>followers</code> in quotes. This is because the brackets actually allow us to pass a variable in to be evaluated as a property name. So if we already
-know the property name, we have to enclose it in quotes.
+We've just defined an object called <code>FCC_User</code> with four <i>properties</i> each of which map to a specific <i>value</i>. If you wanted to know the
+number of followers <code>FCC_User</code> has, you could access that property by writing <code>FCC_User.followers</code> — this is called dot notation.
+You could also access the property with brackets, like so: <code>FCC_User['followers']</code>. Notice with the bracket notation we enclosed 
+<code>followers</code> in quotes. This is because the brackets actually allow us to pass a variable in to be evaluated as a property name. Keep this in mind for later.
 `);
 
 document.write(`<br><br>

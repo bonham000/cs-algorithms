@@ -4,18 +4,18 @@ document.write(`
 
 document.write(`<br><br>
 <b>Description:</b> Objects, and other similar key-value pair data structures, offer some very useful benefits. One clear benefit is that they allow us to
-structure our data in an intuitive way. They are also very flexible. For instance, you can have properties nested to an arbitrary depth, a key can store an
-array, or another object. Objects are also the foundation for JavaScript Object Notation, JSON, which is a widely used method of sending data
+structure our data in an intuitive way. They are also very flexible. For instance, you can have properties nested to an arbitrary depth. Values can also be
+anything, for example a key can store an array, or even another object. Objects are also the foundation for JavaScript Object Notation, JSON, which is a widely used method of sending data
 across the web. <br><br>
 
 Another powerful advantage of key-value pair data structures is constant lookup time. What we mean by this is when you request the value of a specific
-property you will get the value back in the same amount of time regardless of the number of entries in the object. If you had an object with 5 entries or one
+property you will get the value back in the same amount of time (theoretically) regardless of the number of entries in the object. If you had an object with 5 entries or one
 that held a collection of 1,000,000 entries you could still retrieve property values or check if a key exists in the same amount of time.<br><br>
 
 The reason for this fast lookup time is that internally the object is storing
 properties using some type of <i>hashing mechanism</i> which allows it to know exactly where it has stored different property values. If you want to learn more
-about this please take a look at the optional Advanced Data Structures challenges. All you should remember for now is that objects
-provide very performant access to stored data and this makes them a great tool to work with.
+about this please take a look at the optional Advanced Data Structures challenges. All you should remember for now is that performant access to flexibly
+structured data make key-value stores very attractive data structures useful in a wide variety of settings.
 `);
 
 document.write(`<br><br>
@@ -49,6 +49,7 @@ nestedObject.data.online = 45;
 // TESTS
 console.clear();
 
-console.assert('id' in nestedObject && 'date' in nestedObject && 'data' in nestedObject, 'nestedObject has id, date and data properities.');
+console.assert('id' in nestedObject && 'date' in nestedObject && 'data' in nestedObject, 'nestedObject has id, date and data properties.');
 console.assert('totalUsers' in nestedObject.data && 'online' in nestedObject.data, 'nestedObject has a data key set to an object with keys totalUsers and online.');
 console.assert(nestedObject.data.online === 45, 'The online property nested in the data key of nestedObject should be set to 45.');
+
