@@ -1,5 +1,5 @@
 document.write(`
-<b>Title:</b> Check if an Object has a Key
+<b>Title:</b> Check if an Object has a Property
 `)
 
 document.write(`<br><br>

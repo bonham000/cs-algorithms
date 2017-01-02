@@ -1,5 +1,5 @@
 document.write(`
-<b>Title:</b> Modifying an Array Stored in an Object
+<b>Title:</b> Modify an Array Stored in an Object
 `)
 
 document.write(`<br><br>

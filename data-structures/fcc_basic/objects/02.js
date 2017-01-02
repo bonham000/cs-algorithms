@@ -1,5 +1,5 @@
 document.write(`
-<b>Title:</b> Modify an Object Nested within an Object
+<b>Title:</b> Modify an Object Nested Within an Object
 `)
 
 document.write(`<br><br>
