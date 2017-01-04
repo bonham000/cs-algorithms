@@ -1,4 +1,5 @@
 // with auxiliary memory of O(n);
+// time complexity: O(n^2) ... ?
 var sortedToBinaryTree = function(array) {
   let result = [];
   function processData(arr) {
@@ -15,6 +16,7 @@ var sortedToBinaryTree = function(array) {
 };
 
 // in place with constant memory
+// time complexity: O(n)
 var sortedToBinaryTreeInPlace = function(array) {
   let result = [];
   function processData(B, E) {

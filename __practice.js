@@ -15,7 +15,7 @@ let R = [];
 (function gen(n) {
 	while (R.length < n) R.push(+(Math.random() * 100).toFixed());
 	return R;
-})(5000);
+})(5000000);
 
 let sorted = R.sort((a, b) => a - b);
 
@@ -44,14 +44,6 @@ var sortedToBinaryTreeInPlace = function(array) {
   };
   processData(0, array.length - 1);
   return result;
-};
-
-var compare = function(arr1, arr2) {
-  if (arr1.length != arr2.length) return false;
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] != arr2[i]) return false;
-  };
-  return true;
 };
 
 // test code:
