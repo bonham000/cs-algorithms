@@ -1,3 +1,4 @@
+
 "use strict"
 
 // performance timer:
@@ -6,7 +7,7 @@ const timeFn = (fn, args) => {
 	let result = fn(args);
 	let timeEnd = performance.now();
 	console.log(`${fn.prototype.constructor.name} took ${(timeEnd - timeStart).toFixed(6) * 1000} microseconds to run and returned:`);
-	console.log(result);
+	//console.log(result);
 };
 
 // generate a random array:
@@ -14,31 +15,50 @@ let R = [];
 (function gen(n) {
 	while (R.length < n) R.push(+(Math.random() * 100).toFixed());
 	return R;
-})(8);
+})(5000);
 
+let sorted = R.sort((a, b) => a - b);
 
-var longestCommonPrefix = function(strs) {
-  if (strs == '' || strs[0].length == 0) return '';
-  if (strs.length == 1) return strs[0];
-  let pre = '';
-  let dep = 0;
-  let cp = null;
-  for (let a = 1; a < strs.length; a++) {
-  	cp = strs[0][dep];
-  	if (a == 1) pre += strs[a][dep];
-  	if (strs[a][dep] != cp) return pre.slice(0, dep);
-  	if (a == strs.length - 1) {
-  		dep++;
-  		if (dep == strs[0].length) return pre;
-  		a = 0;
-  	}
-  }
+var sortedToBinaryTree = function(array) {
+  let result = [];
+  function processData(arr) {
+    if (arr.length == 0) return;
+    let mid = Math.floor(arr.length / 2);
+    result.push(arr[mid]);
+    if (arr.length > 0) {
+      processData(arr.slice(0, mid));
+      processData(arr.slice(mid + 1));
+    }
+  };
+  processData(array);
+  return result;
+};
+
+var sortedToBinaryTreeInPlace = function(array) {
+  let result = [];
+  function processData(B, E) {
+    let M = Math.floor((E - B) / 2) + B;
+    result.push(array[M]);
+    if (M - B > 0) processData(B, M - 1);
+    if (E - M > 0) processData(M + 1, E);
+  };
+  processData(0, array.length - 1);
+  return result;
+};
+
+var compare = function(arr1, arr2) {
+  if (arr1.length != arr2.length) return false;
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] != arr2[i]) return false;
+  };
+  return true;
 };
 
 // test code:
 console.clear();
-
-console.log(longestCommonPrefix(['a', 'a', 'a']));
+//console.log(R);
+timeFn(sortedToBinaryTree, sorted);
+timeFn(sortedToBinaryTreeInPlace, sorted);
 
 
 
