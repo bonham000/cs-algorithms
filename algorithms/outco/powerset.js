@@ -1,24 +1,4 @@
 
-"use strict"
-
-// performance timer:
-const timeFn = (fn, args) => {
-	let timeStart = performance.now();
-	let result = fn(args);
-	let timeEnd = performance.now();
-	console.log(`${fn.prototype.constructor.name} took ${(timeEnd - timeStart).toFixed(6) * 1000} microseconds to run and returned:`);
-	//console.log(result);
-};
-
-// generate a random array:
-let R = [];
-(function gen(n) {
-	while (R.length < n) R.push(+(Math.random() * 100).toFixed());
-	return R;
-})(15);
-
-let sorted = R.sort((a, b) => a - b);
-
 var permutations = function(str) {
   
   let powerSet = {};
@@ -45,10 +25,11 @@ var permutations = function(str) {
 
 };
 
+// more concise recursive approach
+// time complexity: O(2^n)
+// auxiliary space complexity: O(2^n) (worst case)
 function powerSet(string) {
-
   let powerSet = {};
-
   function buildSet(s = '', i = 0) {
     if (i == string.length) {
       powerSet[s] = true;
@@ -57,19 +38,6 @@ function powerSet(string) {
       buildSet(s, i + 1); 
     };
   };
-
   buildSet();
-
   return Object.keys(powerSet);
-
 };
-
-// test code:
-console.clear();
-console.log(permutations('string'));
-console.log(powerSet('string'));
-
-
-
-
-
