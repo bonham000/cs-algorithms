@@ -18,6 +18,21 @@ let R = [];
 })(15);
 
 let sorted = R.sort((a, b) => a - b);
+
+function twoSum(array, target) {
+	let cache = {};
+	let val = null;
+	for (let i = 0; i < array.length; i++) {
+		val = array[i];
+		if ( (target - val) in cache) {
+			return [cache[target - val], i];
+		}
+		cache[val] = i;
+	}
+	return [-1, -1];
+}
+
 // test code:
 console.clear();
 
+console.log(twoSum([1,2,3,4,5], 3));
