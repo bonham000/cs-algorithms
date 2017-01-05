@@ -63,11 +63,11 @@ function powerSet(string) {
   return Object.keys(powerSet);
 
 };
-
+``
 // test code:
 console.clear();
-console.log(permutations('string'));
-console.log(powerSet('string'));
+console.log(permutations('abc'));
+console.log(powerSet('abc'));
 
 
 
