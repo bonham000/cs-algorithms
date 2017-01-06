@@ -19,23 +19,50 @@ let R = [];
 
 let sorted = R.sort((a, b) => a - b);
 
-function sortedTwoSum(array, target) {
-	if (array.length < 2) return [-1, -1];
-	let f = 0;
-	let l = array.length - 1;
-	let diff = null;
-	while (f < l) {
-		diff = target - array[f];
-		while (array[l] > diff) l--;
-		if (array[l] == diff) return [f, l];
-		f++;
-	}
-	return [-1, -1];
-}
+let Node = function(int) {
+	this.value = int;
+	this.next = null;
+};
+
+let reverseList = function(list) {
+	let node = list;
+	let prev = null;
+	let next = node.next;
+	while (node != null) {
+		next = node.next;
+		node.next = prev;
+		prev = node;
+		node = next;
+	};
+	return prev;
+};
 
 console.clear();
-console.log(sorted);
-console.log(sortedTwoSum([1,2,3], 5));
+
+let list = new Node(5);
+let node2 = new Node(12);
+
+list.next = node2;
+
+let node3 = new Node(15);
+
+node2.next = node3;
+
+console.log(list);
+
+console.log(reverseList(list));
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
