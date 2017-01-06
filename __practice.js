@@ -13,43 +13,29 @@ const timeFn = (fn, args) => {
 // generate a random array:
 let R = [];
 (function gen(n) {
-	while (R.length < n) R.push(+(Math.random() * 1).toFixed());
+	while (R.length < n) R.push(+(Math.random() * 10).toFixed());
 	return R;
-})(30200);
+})(15);
 
 let sorted = R.sort((a, b) => a - b);
 
-function numberOnes(array) {
-
-	if (array.length === 0) return 0;
-
-	let m = null;
-	function findFirst(s, e) {
-		m = Math.floor((e - s) / 2) + s;
-	
-		if (array[m] === 1 && array[m - 1] === 0) {
-			return m;
-		}
-
-		else if (array[m] === 0) {
-			return findFirst(m, e);
-		}
-
-		else if (array[m] === 1 && array[m - 1] === 1) {
-			return findFirst(s, m);
-		};
-
+function sortedTwoSum(array, target) {
+	if (array.length < 2) return [-1, -1];
+	let f = 0;
+	let l = array.length - 1;
+	let diff = null;
+	while (f < l) {
+		diff = target - array[f];
+		while (array[l] > diff) l--;
+		if (array[l] == diff) return [f, l];
+		f++;
 	}
-	let first = findFirst(0, array.length - 1);
-	return array.length - first;
+	return [-1, -1];
 }
 
 console.clear();
 console.log(sorted);
-console.log(sorted.reduce((num, n) => {
-	return (n === 1) ? num + 1 : num;
-}, 0));
-console.log(numberOnes(sorted));
+console.log(sortedTwoSum([1,2,3], 5));
 
 
 
