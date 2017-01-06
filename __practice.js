@@ -19,20 +19,39 @@ let R = [];
 
 let sorted = R.sort((a, b) => a - b);
 
-function twoSum(array, target) {
-	let cache = {};
-	let val = null;
-	for (let i = 0; i < array.length; i++) {
-		val = array[i];
-		if ( (target - val) in cache) {
-			return [cache[target - val], i];
-		}
-		cache[val] = i;
+let countColors = (array) => {
+	let counter = [0,0,0];
+	array.forEach(v => {
+		switch(v) {
+			case 0:
+				counter[0] = counter[0] + 1;
+				break;
+			case 1:
+				counter[1] = counter[1] + 1;
+				break;
+			case 2:
+				counter[2] = counter[2] + 1;
+				break;
+		};
+	});
+	let result = [];
+	let i = 0;
+	while (i < 3) {
+		if (counter[i] > 0) {
+			result.push(i);
+			counter[i] = counter[i] - 1;
+		} else {
+			i++;
+		};
 	}
-	return [-1, -1];
+	return result;
 }
 
-// test code:
 console.clear();
 
-console.log(twoSum([1,2,3,4,5], 3));
+console.log(countColors([0,1,2,1,0,2,1,0,2,1,2,2,1,1,1,1,0,2,1,0,2,2]));
+
+
+
+
+
