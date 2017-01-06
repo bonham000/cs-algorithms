@@ -13,43 +13,43 @@ const timeFn = (fn, args) => {
 // generate a random array:
 let R = [];
 (function gen(n) {
-	while (R.length < n) R.push(+(Math.random() * 100).toFixed());
+	while (R.length < n) R.push(+(Math.random() * 1).toFixed());
 	return R;
-})(15);
+})(30200);
 
 let sorted = R.sort((a, b) => a - b);
 
-let countColors = (array) => {
-	let counter = [0,0,0];
-	array.forEach(v => {
-		switch(v) {
-			case 0:
-				counter[0] = counter[0] + 1;
-				break;
-			case 1:
-				counter[1] = counter[1] + 1;
-				break;
-			case 2:
-				counter[2] = counter[2] + 1;
-				break;
+function numberOnes(array) {
+
+	if (array.length === 0) return 0;
+
+	let m = null;
+	function findFirst(s, e) {
+		m = Math.floor((e - s) / 2) + s;
+	
+		if (array[m] === 1 && array[m - 1] === 0) {
+			return m;
+		}
+
+		else if (array[m] === 0) {
+			return findFirst(m, e);
+		}
+
+		else if (array[m] === 1 && array[m - 1] === 1) {
+			return findFirst(s, m);
 		};
-	});
-	let result = [];
-	let i = 0;
-	while (i < 3) {
-		if (counter[i] > 0) {
-			result.push(i);
-			counter[i] = counter[i] - 1;
-		} else {
-			i++;
-		};
+
 	}
-	return result;
+	let first = findFirst(0, array.length - 1);
+	return array.length - first;
 }
 
 console.clear();
-
-console.log(countColors([0,1,2,1,0,2,1,0,2,1,2,2,1,1,1,1,0,2,1,0,2,2]));
+console.log(sorted);
+console.log(sorted.reduce((num, n) => {
+	return (n === 1) ? num + 1 : num;
+}, 0));
+console.log(numberOnes(sorted));
 
 
 
