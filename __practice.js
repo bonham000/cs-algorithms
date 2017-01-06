@@ -24,33 +24,62 @@ let Node = function(int) {
 	this.next = null;
 };
 
-let reverseList = function(list) {
-	let node = list;
-	let prev = null;
-	let next = node.next;
-	while (node != null) {
-		next = node.next;
-		node.next = prev;
-		prev = node;
-		node = next;
+function MinStack() {
+	this.stack = [];
+	this.minimum = [];
+	this.push = function(value) {
+		this.stack.push(value);
+		if (this.minimum.length == 0) {
+			this.minimum.push(value);
+		} else {
+			let min = this.minimum[this.minimum.length - 1];
+			if (value <= min) {
+				this.minimum.push(value);
+			} else {
+				this.minimum.push(min);
+			}
+		}
 	};
-	return prev;
+	this.pop = function() {
+		this.minimum.pop();
+		return this.stack.pop();
+	};
+	this.min = function() {
+		return this.minimum.pop();
+	};
+	this.peek = function() {
+		return this.stack[this.stack.length - 1];
+	};
 };
 
 console.clear();
 
-let list = new Node(5);
-let node2 = new Node(12);
+let S = new MinStack();
 
-list.next = node2;
+S.push(5);
+S.push(15);
+S.push(3);
+S.push(12);
+S.push(17);
+S.push(4);
 
-let node3 = new Node(15);
+console.log(S)
 
-node2.next = node3;
+console.log(S.peek());
+console.log(S.pop());
+console.log(S.pop());
+console.log(S.min());
 
-console.log(list);
 
-console.log(reverseList(list));
+
+
+
+
+
+
+
+
+
 
 
 
