@@ -1,25 +1,5 @@
-
-"use strict"
-
-// performance timer:
-const timeFn = (fn, args) => {
-	let timeStart = performance.now();
-	let result = fn(args);
-	let timeEnd = performance.now();
-	console.log(`${fn.prototype.constructor.name} took ${(timeEnd - timeStart).toFixed(6) * 1000} microseconds to run and returned:`);
-	console.log(result);
-};
-
-// generate a random array:
-let R = [];
-(function gen(n) {
-	while (R.length < n) R.push(+(Math.random() * 10).toFixed());
-	return R;
-})(15);
-
-let sorted = R.sort((a, b) => a - b);
-
 /* here is my solution for the valley flood problem:
+	 author: Sean Smith
 -------------------------------------------------------------- */
 
 // this solution iterates through the array of height data and
@@ -81,7 +61,7 @@ function valleyFlood(array) {
 
 }
 
-console.clear();
+// test function:
 
 var example = [2, 4, 5, 2, 3, 4, 6, 6, 5]; // should return 6 units
 var valley1 = [2, 4, 5, 2, 3, 4, 6, 6, 4, 5]; // should return 7 units
@@ -94,31 +74,11 @@ var valley5 = [5, 1, 2, 3, 4, 5]; // should return 10 units
 // here a valley is deeper than 1 unit from its neighbors
 var valley6 = [9, 8, 7, 6, 4, 4, 6, 7, 8, 9]; // should return 22 units
 
-console.log('Example:',  valleyFlood(example));
-console.log('Valley 1:', valleyFlood(valley1));
-console.log('Valley 2:', valleyFlood(valley2));
-console.log('Valley 3:', valleyFlood(valley3));
-console.log('Valley 4:', valleyFlood(valley4));
-console.log('Valley 5:', valleyFlood(valley5));
-console.log('Valley 6:', valleyFlood(valley6));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log('Example:',  valleyFlood(example)); // 6
+console.log('Valley 1:', valleyFlood(valley1)); // 7
+console.log('Valley 2:', valleyFlood(valley2)); // 20
+console.log('Valley 3:', valleyFlood(valley3)); // 1
+console.log('Valley 4:', valleyFlood(valley4)); // 10
+console.log('Valley 5:', valleyFlood(valley5)); // 10
+console.log('Valley 6:', valleyFlood(valley6)); // 22
 
