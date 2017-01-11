@@ -1,53 +1,11 @@
-/* here is my solution for the valley flood problem:
-	 author: Sean Smith
--------------------------------------------------------------- */
+## Solution for the valley flood problem: ##
+**Author: Sean Smith**
 
-// This solution iterates through the array of height data and
-// establishes left and right boundaries that mark valleys.
-// Then, it computes the maximum height for each valley and
-// calculates the volume within, accumulating this in a total
-// volume variable which is returned.
+This solution iterates through the array of height data and establishes left and right boundaries that mark valleys. Then, it computes the maximum height for each valley and calculates the volume within, accumulating this in a total volume variable which is returned.
 
-// This algorithm will operate in linear time, O(n), and
-// requires constant memory, O(1).
+This algorithm will operate in **linear time**, O(n), and requires **constant memory**, O(1).
 
 ``` javascript
-function valleyFlood(array) {
-	if (array.length < 3) return 0;
-
-	let bounds = [];
-	let leftBound = null;
-	let rightBound = null;
-
-	for (let i = 0; i < array.length; i++) {
-		if (array[i + 1] < array[i] && leftBound === null) leftBound = i;
-		if (array[i + 1] > array[i]) {
-			rightBound = i;
-			if (array[i + 1] >= array[leftBound]) {
-				bounds.push([leftBound, rightBound + 1]);
-				leftBound = null;
-				rightBound = null;
-			}
-		}
-	}
-
-	if (rightBound != null) bounds.push([leftBound, rightBound + 1]);
-	let volume = 0;
-	function calculateVolume(left, right) {	
-		let height = (array[left] < array[right]) ? array[left] : array[right];
-		for (let i = left; i < right; i++) {
-			if (array[i] < height) {
-				volume += height - array[i];
-			}
-		}
-	}
-
-	bounds.forEach(bounds => calculateVolume(bounds[0], bounds[1]));
-	
-	return volume;
-
-}
-
 function valleyFlood(array) {
 
 	// handle edge case where array is small and no valley is possible
@@ -102,6 +60,8 @@ function valleyFlood(array) {
 
 }
 ```
+
+### Running Tests: ###
 
 ``` javascript
 var example = [2, 4, 5, 2, 3, 4, 6, 6, 5]; // should return 6 units
