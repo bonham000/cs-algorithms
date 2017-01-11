@@ -19,45 +19,84 @@ let R = [];
 
 //let sorted = R.sort((a, b) => a - b);
 
+function valleyFlood(array) {
 
-function quickSort(array) {
-	
-	if (array.length < 2) return array;
+	// this will track the boundaries for one (or more) valleys we encounter
+	let bounds = [];
 
-	let pivot = array[0];
-	let boundary = 1;
+	// variables to track left and right valley bounds
+	let leftBound = null;
+	let rightBound = null;
 
-	for (let i = 1; i < array.length; i++) {
-		if (array[i] <= pivot) {
-			[array[boundary], array[i]] = [array[i], array[boundary]];
-			boundary++;
+	// iterate through the array, establish left/right boundaries for valleys
+	for (let i = 0; i < array.length; i++) {
+		if (array[i + 1] < array[i] && leftBound === null) {
+			leftBound = i;
+		}
+		if (array[i + 1] > array[i]) {
+			rightBound = i;
+			if (array[i + 1] >= array[leftBound]) {
+				// multiple valleys could exist, so once we have found one valley
+				// we will reset the bounds in case we find another
+				bounds.push([leftBound, rightBound + 1]);
+				leftBound = null;
+				rightBound = null;
+			}
 		}
 	}
 
-	let mid = boundary - 1;
+	// handle edge case for a partial valley on the right edge of array
+	if (rightBound != null) bounds.push([leftBound, rightBound + 1]);
 
-	[array[0], array[mid]] = [array[mid], array[0]];
-	
-	let left = quickSort(array.slice(0, mid));
-	let right = quickSort(array.slice(mid + 1));
+	// establish variable to track total volume
+	let volume = 0;
 
-	return [...left, array[mid], ...right];
+	// helper function to calculate volume based on left and right bounds
+	// this determines maximum height and then calculates the enclosed volume
+	function calculateVolume(left, right) {	
+		let height = (array[left] < array[right]) ? array[left] : array[right];
+		for (let i = left; i < right; i++) {
+			if (array[i] < height) {
+				volume += height - array[i];
+			}
+		}
+	}
+
+	// calculate the total volume for each valley we found
+	bounds.forEach(bounds => calculateVolume(bounds[0], bounds[1]));
+
+	// return the total accumulated volume
+	return volume;
 
 }
 
 console.clear();
 
-let A = [7]
+var example = [2, 4, 5, 2, 3, 4, 6, 6, 5]; // should return 6 units
+var valley1 = [2, 4, 5, 2, 3, 4, 6, 6, 4, 5]; // should return 7 units
+var valley2 = [9, 8, 7, 6, 5, 5, 6, 7, 8, 9]; // should return 20 units
+var valley3 = [3, 2, 1, 2]; // should return 1 unit
+var valley4 = [5, 4, 3, 2, 1, 5]; // should return 10 units
+var valley5 = [5, 1, 2, 3, 4, 5]; // should return 10 units
 
-console.log(R);
-console.log(quickSort(R));
+// additional valleys for testing (mostly edge cases):
+var valley6 = [5]; // should return 0 units
+var valley7 = [5, 3]; // should return 0 units
+var valley8 = [5, 4, 7]; // should return 1 unit
+var valley9 = [5, 1, 7]; // should return 4 units
+var valley10 = [9, 8, 7, 6, 4, 4, 6, 7, 8, 9]; // should return 22 units
 
-
-
-
-
-
-
-
+// run tests:
+console.log('Example:',  valleyFlood(example)); // 6
+console.log('Valley 1:', valleyFlood(valley1)); // 7
+console.log('Valley 2:', valleyFlood(valley2)); // 20
+console.log('Valley 3:', valleyFlood(valley3)); // 1
+console.log('Valley 4:', valleyFlood(valley4)); // 10
+console.log('Valley 5:', valleyFlood(valley5)); // 10
+console.log('Valley 6:', valleyFlood(valley6)); // 0
+console.log('Valley 7:', valleyFlood(valley7)); // 0
+console.log('Valley 8:', valleyFlood(valley8)); // 1
+console.log('Valley 9:', valleyFlood(valley9)); // 4
+console.log('Valley 10:', valleyFlood(valley10)); // 22
 
 
