@@ -12,45 +12,6 @@
 // requires constant memory, O(1).
 
 function valleyFlood(array) {
-	if (array.length < 3) return 0;
-
-	let bounds = [];
-	let leftBound = null;
-	let rightBound = null;
-
-	for (let i = 0; i < array.length; i++) {
-		if (array[i + 1] < array[i] && leftBound === null) leftBound = i;
-		if (array[i + 1] > array[i]) {
-			rightBound = i;
-			if (array[i + 1] >= array[leftBound]) {
-				bounds.push([leftBound, rightBound + 1]);
-				leftBound = null;
-				rightBound = null;
-			}
-		}
-	}
-
-	if (rightBound != null) bounds.push([leftBound, rightBound + 1]);
-	let volume = 0;
-	function calculateVolume(left, right) {	
-		let height = (array[left] < array[right]) ? array[left] : array[right];
-		for (let i = left; i < right; i++) {
-			if (array[i] < height) {
-				volume += height - array[i];
-			}
-		}
-	}
-
-	bounds.forEach(bounds => calculateVolume(bounds[0], bounds[1]));
-	
-	return volume;
-
-}
-
-function valleyFlood(array) {
-
-	// handle edge case where array is small and no valley is possible
-	if (array.length < 3) return 0;
 
 	// this will track the boundaries for one (or more) valleys we encounter
 	let bounds = [];

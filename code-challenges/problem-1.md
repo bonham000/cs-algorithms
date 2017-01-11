@@ -5,7 +5,7 @@ This solution iterates through the array of height data and establishes left and
 
 This algorithm will operate in **linear time**, O(n), and requires **constant memory**, O(1).
 
-### Tests for Function: ###
+### Test Cases for Algorithm: ###
 
 ``` javascript
 var example = [2, 4, 5, 2, 3, 4, 6, 6, 5]; // should return 6 units

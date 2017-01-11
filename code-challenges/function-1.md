@@ -45,7 +45,6 @@ function valleyFlood(array) {
 	// calculate the total volume for each valley we found
 	bounds.forEach(bounds => calculateVolume(bounds[0], bounds[1]));
 
-	// return the total accumulated volume
 	return volume;
 
 }
