@@ -15,88 +15,119 @@ let R = [];
 (function gen(n) {
 	while (R.length < n) R.push(+(Math.random() * 10).toFixed());
 	return R;
-})(7);
+})(12);
 
 //let sorted = R.sort((a, b) => a - b);
 
-function valleyFlood(array) {
-
-	// this will track the boundaries for one (or more) valleys we encounter
-	let bounds = [];
-
-	// variables to track left and right valley bounds
-	let leftBound = null;
-	let rightBound = null;
-
-	// iterate through the array, establish left/right boundaries for valleys
-	for (let i = 0; i < array.length; i++) {
-		if (array[i + 1] < array[i] && leftBound === null) {
-			leftBound = i;
-		}
-		if (array[i + 1] > array[i]) {
-			rightBound = i;
-			if (array[i + 1] >= array[leftBound]) {
-				// multiple valleys could exist, so once we have found one valley
-				// we will reset the bounds in case we find another
-				bounds.push([leftBound, rightBound + 1]);
-				leftBound = null;
-				rightBound = null;
-			}
-		}
+class MinHeap {
+	constructor() {
+		this.storage = [];
 	}
 
-	// handle edge case for a partial valley on the right edge of array
-	if (rightBound != null) bounds.push([leftBound, rightBound + 1]);
+	swap(index1, index2) {
+		[this.storage[index1], this.storage[index2]] = [this.storage[index2], this.storage[index1]];
+	}
+	size() {
+		return this.storage.length;
+	}
+	peak() {
+		return this.storage[0];
+	}
+	insert(value) {
+		this.storage.push(value);
+		this.bubbleUp(this.size() - 1)
+	}
+	bubbleUp(index) {
+		var childIndex = index;
+		var parentIndex = (childIndex % 2 == 0) ?
+			(childIndex - 2) / 2 : (childIndex - 1) / 2;
 
-	// establish variable to track total volume
-	let volume = 0;
+		while(childIndex > 0 && this.storage[parentIndex] > this.storage[childIndex]) {
 
-	// helper function to calculate volume based on left and right bounds
-	// this determines maximum height and then calculates the enclosed volume
-	function calculateVolume(left, right) {	
-		let height = (array[left] < array[right]) ? array[left] : array[right];
-		for (let i = left; i < right; i++) {
-			if (array[i] < height) {
-				volume += height - array[i];
+			this.swap(childIndex, parentIndex);
+			childIndex = parentIndex;
+			parentIndex = (childIndex % 2 == 0) ?
+				(childIndex - 2) / 2 : (childIndex - 1) / 2;
+
+		}
+
+	}
+	removePeak() {
+		this.swap(0, this.size() - 1);
+		var toReturn = this.storage.pop();
+		this.bubbleDown(0);
+		return toReturn
+	}
+	bubbleDown(index) {
+		var parentIndex = index;
+		var leftIndex = 2 * parentIndex + 1;
+		var rightIndex = 2 * parentIndex + 2;
+		var masterChildIndex;
+		if (leftIndex > this.size()) {
+			return;
+		} else if (rightIndex >= this.size()) {
+			masterChildIndex = leftIndex;
+		} else if (this.storage[leftIndex] < this.storage[rightIndex]) {
+			masterChildIndex = leftIndex;
+		} else {
+			masterChildIndex = rightIndex;
+		}
+
+		while(leftIndex < this.size() && this.storage[parentIndex] > this.storage[masterChildIndex]) {
+			this.swap(parentIndex, masterChildIndex);
+			
+			parentIndex = index;
+			leftIndex = 2 * parentIndex + 1;
+			rightIndex = 2 * parentIndex + 2;
+			
+			if (leftIndex > this.size()) {
+				return;
+			} else if (rightIndex >= this.size()) {
+				masterChildIndex = leftIndex;
+			} else if (this.storage[leftIndex] < this.storage[rightIndex]) {
+				masterChildIndex = leftIndex;
+			} else {
+				masterChildIndex = rightIndex;
 			}
+
 		}
 	}
+	remove(value) {
 
-	// calculate the total volume for each valley we found
-	bounds.forEach(bounds => calculateVolume(bounds[0], bounds[1]));
+		var index;
+		for (var i = 0; i < this.storage.length; i++) {
+			if (this.storage[i] === value) {
+				index = i;
+				break;
+			}
+		}
 
-	// return the total accumulated volume
-	return volume;
+		if (index == null) return;
+
+		this.swap(index, this.size() - 1);
+		var toReturn = this.storage.pop();
+
+		this.bubbleDown(index);
+		this.bubbleUp(index);
+
+		return toReturn;
+
+	}
+
 
 }
 
 console.clear();
 
-var example = [2, 4, 5, 2, 3, 4, 6, 6, 5]; // should return 6 units
-var valley1 = [2, 4, 5, 2, 3, 4, 6, 6, 4, 5]; // should return 7 units
-var valley2 = [9, 8, 7, 6, 5, 5, 6, 7, 8, 9]; // should return 20 units
-var valley3 = [3, 2, 1, 2]; // should return 1 unit
-var valley4 = [5, 4, 3, 2, 1, 5]; // should return 10 units
-var valley5 = [5, 1, 2, 3, 4, 5]; // should return 10 units
+let heap = new MinHeap();
+for (let n of R) heap.insert(n);
+console.log(heap.storage);
+console.log(heap.removePeak());
+console.log(heap.storage);
+console.log(heap.removePeak());
+console.log(heap.storage);
+console.log(heap.remove(4));
+console.log(heap.storage);
 
-// additional valleys for testing (mostly edge cases):
-var valley6 = [5]; // should return 0 units
-var valley7 = [5, 3]; // should return 0 units
-var valley8 = [5, 4, 7]; // should return 1 unit
-var valley9 = [5, 1, 7]; // should return 4 units
-var valley10 = [9, 8, 7, 6, 4, 4, 6, 7, 8, 9]; // should return 22 units
-
-// run tests:
-console.log('Example:',  valleyFlood(example)); // 6
-console.log('Valley 1:', valleyFlood(valley1)); // 7
-console.log('Valley 2:', valleyFlood(valley2)); // 20
-console.log('Valley 3:', valleyFlood(valley3)); // 1
-console.log('Valley 4:', valleyFlood(valley4)); // 10
-console.log('Valley 5:', valleyFlood(valley5)); // 10
-console.log('Valley 6:', valleyFlood(valley6)); // 0
-console.log('Valley 7:', valleyFlood(valley7)); // 0
-console.log('Valley 8:', valleyFlood(valley8)); // 1
-console.log('Valley 9:', valleyFlood(valley9)); // 4
-console.log('Valley 10:', valleyFlood(valley10)); // 22
 
 
