@@ -22,4 +22,38 @@ var R = [];
 
 var sorted = (A) => A.sort((a, b) => a - b);
 
+function latticePaths(n) {
+	var paths = 0;
+	var seeker = {
+		right: 0,
+		down: 0
+	};
+	function search(position) {
+		let fork = Object.assign({}, position);
+		if (position.right < n) {
+			position.right++;
+			if (position.right == n && position.down == n) {
+				paths++;
+			} else {
+				search(position);
+			}
+		}
+		if (fork.down < n) {
+			fork.down++;
+			if (fork.right == n && fork.down == n) {
+				paths++;
+			} else {
+				search(fork);
+			}
+		}
+	}
+	search(seeker);
+	return paths;
+}
+
 console.clear();
+console.log('hello')
+console.log(latticePaths(4))
+
+
+
