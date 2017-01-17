@@ -1,0 +1,218 @@
+.hide {
+  display: none;
+}
+
+.modal {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Helvetica, sans-serif;
+  color: black;
+  text-shadow: none;
+  width: 250px;
+  padding: 10px;
+  margin-top: 3px;
+  box-shadow: 1px 1px 7px -2px;
+}
+
+.modal .name {
+  color: rgb(255, 170, 0);
+  font-family: monospace;
+  font-size: 1.3em;
+}
+
+.attributes .modal {
+  font-weight: normal;
+  text-align: left;
+}
+
+a.up, a.down {
+  text-decoration: none;
+  text-shadow: none;
+}
+
+th, td {
+  padding: 4px;
+  font-family: monospace;
+}
+
+th {
+  background-color: rgb(161, 164, 183);
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  border: 1px solid rgb(129, 132, 155);
+}
+
+td.null {
+  color: #ccc;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.aggregate-labels {
+  border-top: 2px solid #ccc;
+}
+
+.aligned label {
+  width: 40px;
+  display: inline-block;
+}
+
+button.custom-filter {
+  float: right;
+}
+
+.modal h3 {
+  margin-bottom: 0.3em;
+}
+
+
+/* my added styles: */
+
+body {
+  background: rgb(245,245,245);
+  padding-left: 12px;
+  min-width: 1250px;
+}
+table {
+  background: white;
+}
+.up, .down, .up:visited, .down:visited {
+  color: black;
+}
+.up:hover, .down:hover {
+  color: #26D0C4;
+}
+h1 {
+  margin-top: 20px;
+  margin-bottom: 0px;
+  font-family: 'Verdana'
+}
+h2 {
+  font-family: 'Verdana';
+  margin: 15px auto;
+  font-size: 22px;
+  text-decoration: underline;
+}
+p {
+  font-size: 18px;
+  font-family: 'Verdana'
+}
+.sub1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.sub2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.sub3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.sub4 {
+  margin-top: 0px;
+  margin-bottom: 25px;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.filterContainer {
+  padding-left: 12px;
+  margin-top: -8px;
+}
+.filterContainer p {
+  margin: 6px auto;
+  font-weight: bold;
+}
+.filterContainer select {
+  width: 200px;
+  font-size: 22px;
+  margin-left: 10px;
+}
+.filterContainer select:hover {
+  cursor: pointer;
+}
+.closeFilter {
+  font-size: 38px;
+  margin-left: 12px;
+  font-weight: bold;
+}
+.closeFilter:hover {
+  cursor: pointer;
+  color: red;
+}
+.customFilter button {
+  margin: 5px;
+  font-size: 18px;
+  padding: 6px 4px;
+}
+.customFilter button:hover {
+  cursor: pointer;
+  color: #2884FB;
+}
+#closeBtn:hover {
+  color: red;
+}
+#submitBtn:hover {
+  color: #26D0C4;
+}
+.customFilter .resetBtn {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+.customFilter p {
+  font-size: 16px;
+}
+.customFilter input {
+  margin: 6px auto 8px auto;
+  font-size: 18px;
+  border: 1px solid black;
+  width: 250px;
+  padding: 3px 5px;
+}
+
+.reloadBtn {
+  margin-top: 15px;
+  margin-left: 10px;
+  font-size: 18px;
+  padding: 6px 4px;
+}
+.reloadBtn:hover {
+  color: red;
+  cursor: pointer;
+}
+
+td {
+  border: 1px solid rgba(129, 132, 155, 0.35);
+}
+
+td:hover {
+  background: rgba(200,200,200,0.25);
+  cursor: pointer;
+}
+
+.name:hover {
+  color: #26D0C4;
+  cursor: pointer;
+}
+
+.statHeader {
+  text-align: left;
+  padding-left: 8px;
+}
+
+.stat {
+  background: rgb(230,230,230);
+  font-weight: bold;
+  padding-left: 8px;
+}
+
+
