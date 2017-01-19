@@ -1,0 +1,48 @@
+body {
+  background: #FFFAAB;
+  padding-bottom: 55px;
+  font-family: sans-serif;
+}
+
+.App {
+	width: 650px;
+	margin: auto;
+	text-align: center;
+	font-family: 'Varela Round', sans-serif;
+}
+
+h1 {
+	
+	font-family: 'Exo 2', sans-serif;
+	font-size: 50px;
+}
+
+.subTitle {
+	font-size: 32px;
+	text-decoration: underline;
+}
+
+.test {
+	font-family: 'Source Sans Pro', sans-serif;
+	border: 1px solid black;
+	width: 550px;
+	margin: 10px auto;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.testBtn {
+	width: 275px;
+	padding: 15px;
+	font-size: 28px;
+	margin: 12px auto;
+	background: #8386FB;
+	font-weight: bold;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+button:hover {
+	cursor: pointer;
+	background: #6468FF;
+}
