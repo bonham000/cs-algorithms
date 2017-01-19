@@ -138,6 +138,7 @@ var edges = [
   ['D', 'G'],
   ['F', 'G']
 ].forEach(edge => graph.addEdge(edge[0], edge[1]));
+
 console.log(graph);
 
 
@@ -175,10 +176,34 @@ Graph.prototype.breadthFirst = function(initialVertex) {
       }
     })
   }
-
   return result;
-
 };
+
+Graph.prototype.depthFirst = function(initialVertex) {
+  var stack = [];
+  var result = [];
+  var visited = {};
+  var start = this.getVertex(initialVertex);
+
+  visited[start.value] = true;
+  result.push(start.value);
+  stack.push(start);
+
+  while (stack.length > 0) {
+    var retreat = true;
+    for (var adjacent in stack[stack.length - 1].edges) {
+      if (!(adjacent in visited)) {
+        visited[adjacent] = true;
+        stack.push(this.getVertex(adjacent));
+        result.push(adjacent);
+        retreat = false;
+        break;
+      }
+    }
+    if (retreat) stack.pop();
+  }
+  return result;
+}
 
 
 /*
