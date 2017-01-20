@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-	entry: './algorithms/outco/graph-traversals.js',
+	entry: './__practice.js',
 	output: {
 		filename: 'bundle.js'
 	},
