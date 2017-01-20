@@ -24,38 +24,46 @@ var R = [];
 
 var sorted = (A) => A.sort((a, b) => a - b);
 
-function maxSum(array) {
+function latticePaths(N) {
 
-	var negatives = 0;
-	var sum = 0;
+	var validToEnd = {};
+	var uniquePaths = 0;
 
-	for (var i = 0; i < array.length; i++) {
-		if (negatives < 0 && array[i] > 0) {
-			var priorSum = (negatives + array[i]);
-			if (array[i] > (priorSum + sum)) {
-				sum = array[i];
-				negatives = 0;
-			} else if ((priorSum + sum) > sum) {
-				sum += priorSum;
-				negatives = 0;
+	function explore(x, y, path) {
+		if (x === N && y === N) {
+			uniquePaths++;
+			path.forEach(position => {
+				validToEnd[(position[0].toString() + position[1].toString())] = true;
+			});
+			return;
+		}
+		if (x < N) {
+			if (validToEnd[((x + 1).toString() + y.toString())] === true) {
+				uniquePaths++;
+			} else {
+				path.push([x + 1, y]);
+				explore(x + 1, y, path);
+			};
+		}
+		if (y < N) {
+			if (validToEnd[((x).toString() + (y + 1).toString())] === true) {
+				uniquePaths++;
+			} else {
+				path.push([x, y + 1]);
+				explore(x, y + 1, path);
 			}
-		} else if (array[i] < 0) {
-			if (sum === 0) continue;
-			negatives += array[i];
-		} else if (array[i] >= 0) {
-			sum += array[i];
 		}
 	}
 
-	return sum;
+	explore(0, 0, []);
+
+	return uniquePaths;
 
 };
 
 console.clear();
 
-var nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
-
-console.log(maxSum(nums));
+console.log(latticePaths(2));
 
 
 
