@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-	entry: './code-challenges/flatten-array/flatten-solutions.js',
+	entry: './__practice.js',
 	output: {
 		filename: 'bundle.js'
 	},

@@ -76,6 +76,8 @@ var valley8 = [5, 4, 7]; // should return 1 unit
 var valley9 = [5, 1, 7]; // should return 4 units
 var valley10 = [9, 8, 7, 6, 4, 4, 6, 7, 8, 9]; // should return 22 units
 
+var valley11 = [10,9,8,7,6,5,6,7,4,3,2];
+
 // run tests:
 console.log('Example:',  valleyFlood(example)); // 6
 console.log('Valley 1:', valleyFlood(valley1)); // 7

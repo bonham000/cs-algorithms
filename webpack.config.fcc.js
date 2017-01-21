@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-	entry: './code-challenges/commerce-api/api.js',
+	entry: './__practice.js',
 	output: {
 		filename: 'bundle.js'
 	},

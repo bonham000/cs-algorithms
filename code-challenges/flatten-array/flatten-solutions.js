@@ -9,8 +9,13 @@
    uses a functional approach to reduce the initial array according to
    the following logic:
 
-   For every element, if it is an array flatten it, otherwise accumulate
-   the element in a new array which is returned.
+   For every element, if it is an array flatten it, otherwise accummulate
+   the element in a new array, which will be returned.
+
+   While this solution is clear and readable, it would be less performant
+   than the other two solutions. If perforamance was a concern, the 2nd
+   function would perform best, operating in linear time complexity and
+   linear space complexity.
 
    Each function also assumes it will only receive an array as input, some
    more code would be needed if there was a possibility that the input could
@@ -19,7 +24,7 @@
 
 // SOLUTIONS: *************************************************************
 
-// Approach 1: recursive + functional approach using the .reduce method:
+// Approach 1: recursive + functional approach using the .reduce method (elegant solution):
 function flatten1(array) {
   
   return array.reduce((total, current) => {
@@ -34,7 +39,7 @@ function flatten1(array) {
 
 };
 
-// Approach 2: recursive approach using helper method recursion and side effects:
+// Approach 2: recursive approach using helper method recursion and side effects (most efficient solution);
 function flatten2(array) {
 
   var result = [];
@@ -144,7 +149,7 @@ var tests = [
   },
 ];
 
-// execute tests for all three functions for the above cases/solutions:
+// execute tests for all three functions for the above cases/solutions out log result to the console:
 
 console.log('Starting tests:\n');
 
