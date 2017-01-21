@@ -24,70 +24,8 @@ var R = [];
 
 var sorted = (A) => A.sort((a, b) => a - b);
 
-function latticePaths(N) {
 
-	var validToEnd = {};
-	var uniquePaths = 0;
 
-	function explore(x, y, path) {
-		if (x === N && y === N) {
-			uniquePaths++;
-			path.forEach(position => {
-				validToEnd[(position[0].toString() + position[1].toString())] = true;
-			});
-			return;
-		}
-		if (x < N) {
-			if (validToEnd[((x + 1).toString() + y.toString())] === true) {
-				uniquePaths++;
-			} else {
-				path.push([x + 1, y]);
-				explore(x + 1, y, path);
-			};
-		}
-		if (y < N) {
-			if (validToEnd[((x).toString() + (y + 1).toString())] === true) {
-				uniquePaths++;
-			} else {
-				path.push([x, y + 1]);
-				explore(x, y + 1, path);
-			}
-		}
-	}
 
-	explore(0, 0, []);
-
-	return uniquePaths;
-
-};
 
 console.clear();
-
-console.log(latticePaths(2));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
