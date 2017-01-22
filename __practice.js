@@ -18,48 +18,73 @@ function isSorted(arr) {
 // generate a random array:
 var R = [];
 (function gen(n = 5) {
-	while (R.length < n) {
-		var element = +(Math.random() * 10).toFixed();
-		if (Math.random() > 0.5) element = [ element ];
-		R.push(element);
-	}
+	while (R.length < n) R.push(+(9 - Math.random() * 10).toFixed());
 	return R;
-})(12000)
+})(15)
 
 var sorted = (A) => A.sort((a, b) => a - b);
 
 
-function latticePaths(n) {
+function threeSum(array) {
 
-  var grid = [];
+  var cache = {};
+  array.forEach((n, i) => cache[n] = i);
 
-  for (var i = 0; i < n + 1; i++) {
-    var level = [];
-    for (var j = 0; j < n + 1; j++) {
-      if (i == n || j == n) {
-        level.push(1);
-      } else {
-        level.push(0);
-      }
-    }
-    grid.push(level);
+  for (var a = 0; a < array.length; a++) {
+    var current = array[a];
+    for (var b = a + 1; b < array.length; b++) {
+      var needed = -(current + array[b]);
+      if (needed in cache && cache[needed] != a && cache[needed] != b) {
+        return [a, b, cache[needed]];
+      };
+    };
   };
 
-  for (var a = n - 1; a >= 0; a--) {
-    for (var b = n - 1; b >= 0; b--) {
-      grid[a][b] = grid[a + 1][b] + grid[a][b + 1];
-    }
-  };
-
-  return grid[0][0];
+  return false;
 
 };
 
+// function depthCounter(arr) {
+//   let depth = 0;
+
+//   function howDeep(array, i, d) { 
+//     if (Array.isArray(array[i])) {
+//       return howDeep(array[i], 0, d + 1);
+//     } else {
+//       depth = (d > depth) ? d : depth;
+//     }
+
+//     if (i < array.length) {
+//       return howDeep(array, i + 1, d);
+//     }
+
+//   }
+
+//   howDeep(arr, 0, 0);
+//   return depth;
+
+// }
+
+// let myNestedArray = [ 1,
+//   [ 2, 'coding is fun!', 3, 4, true ],
+//   [ true, false, "xxxxx",
+//     [ 3, 4, 5,
+//       [ 4, 5, 6, 7,
+//         [1, 2, 3, 'coding is fun!']
+//       ]
+//     ]
+//   ],
+//   [
+//     2, 3, 4, 5, 6, 7, 8, 100000
+//   ]
+// ];
 
 
 console.clear();
+console.log(R)
+console.log(threeSum(R));
 
-console.log(latticePaths(20));
+//console.log(depthCounter(myNestedArray));
 
 
 
