@@ -18,7 +18,7 @@ function isSorted(arr) {
 // generate a random array:
 var R = [];
 (function gen(n = 5) {
-	while (R.length < n) R.push(+(Math.random()).toFixed(2));
+	while (R.length < n) R.push(+(Math.random() * 100).toFixed());
 	return R;
 })(15)
 
@@ -26,7 +26,11 @@ var sorted = (A) => A.sort((a, b) => a - b);
 
 function kthSmallest(array, k){
 
+	if (k > array.length) return;
+
   function quickHelper(start, end) {
+
+  	if (start === end) return array[start];
 
     var pivot = array[start];
     var edge = start + 1;
@@ -34,30 +38,45 @@ function kthSmallest(array, k){
     for (var i = start + 1; i < end; i++) {
       if (array[i] <= pivot) {
         [array[edge], array[i]] = [array[i], array[edge]];
+        edge++;
       }
     }
 
     var mid = edge - 1;
 
-    [array[0], array[mid]] = [array[mid], array[i]];
+    [array[start], array[mid]] = [array[mid], array[start]];
 
-    if (mid === k) {
+    console.log(array, mid)
+
+    if (mid === k - 1) {
       return array[mid];
     } else if (mid < k) {
-      quickHelper(mid + 1, end);
+      return quickHelper(mid + 1, end);
     } else {
-      quickHelper(start, mid);
+      return quickHelper(start, mid);
     }
 
   }
 
-  return quickHelper(0, array.length - 1);
+  return quickHelper(0, array.length);
 
 };
 
 console.clear();
+var sample = [1984, 1337, 9000, 8304, 5150, 9000, 8304];
+
 console.log(R);
-//console.log(bucketSort(R));
+var k = 5;
+
+//console.log(sample);
+
+console.log('\n');
+console.log(kthSmallest([8304], 1));
+console.log('\n');
+
+var S = R.sort((a,b) => a - b);
+console.log(S, S[k - 1]);
+
 
 
 
