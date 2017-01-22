@@ -29,111 +29,81 @@ var R = [];
 var sorted = (A) => A.sort((a, b) => a - b);
 
 
-function valleyFlood(array) {
+function latticePaths(n) {
 
-  let bounds = [];
-  let highest = null;
-  let leftBound = null;
-  let rightBound = null;
+  var grid = [];
 
-  for (let i = 0; i < array.length; i++) {
-    if (highest != null && array[i] >= array[highest]) {
-
-      var newBounds = [];
-      var reset = null;
-      for (var j = 0; j < bounds.length; j++) {
-        if (bounds[j][0] === highest) {
-          var newElement = [highest, i];
-          newBounds.push(newElement);
-          break;
-        }
-        newBounds.push(bounds[j]);
-      }
-      bounds = newBounds;
-      highest = null;
-
-      if (array[i + 1] < array[i] && leftBound === null) {
-        if (highest === null) {
-          highest = i;
-        } else if (array[i] >= array[highest]) {
-          highest = i;
-        }
-        leftBound = i;
-      }
-    } else if (array[i + 1] < array[i] && leftBound === null) {
-      if (highest === null) {
-        highest = i;
-      } else if (array[i] >= array[highest]) {
-        highest = i;
-      }
-      leftBound = i;
-    } else if (array[i + 1] < array[i] && rightBound != null) {
-      bounds.push([leftBound, rightBound + 1]);
-      leftBound = null;
-      rightBound = null;
-    } else if (array[i + 1] > array[i]) {
-      rightBound = i;
-      if (array[i + 1] >= array[leftBound]) {
-        bounds.push([leftBound, rightBound + 1]);
-        leftBound = null;
-        rightBound = null;
+  for (var i = 0; i < n + 1; i++) {
+    var level = [];
+    for (var j = 0; j < n + 1; j++) {
+      if (i == n || j == n) {
+        level.push(1);
+      } else {
+        level.push(0);
       }
     }
-  }
+    grid.push(level);
+  };
 
-  if (rightBound != null) bounds.push([leftBound, rightBound + 1]);
-
-  let volume = 0;
-
-  function calculateVolume(left, right) { 
-    let height = (array[left] < array[right]) ? array[left] : array[right];
-    for (let i = left; i < right; i++) {
-      if (array[i] < height) {
-        volume += height - array[i];
-      }
+  for (var a = n - 1; a >= 0; a--) {
+    for (var b = n - 1; b >= 0; b--) {
+      grid[a][b] = grid[a + 1][b] + grid[a][b + 1];
     }
-  }
+  };
 
-  bounds.forEach(bounds => calculateVolume(bounds[0], bounds[1]));
+  return grid[0][0];
 
-  return volume;
+};
 
-}
+// function howDeep(input, target) {
+//   var depth = 0;
 
-var example = [2, 4, 5, 2, 3, 4, 6, 6, 5]; // should return 6 units
-var valley1 = [2, 4, 5, 2, 3, 4, 6, 6, 4, 5]; // should return 7 units
-var valley2 = [9, 8, 7, 6, 5, 5, 6, 7, 8, 9]; // should return 20 units
-var valley3 = [3, 2, 1, 2]; // should return 1 unit
-var valley4 = [5, 4, 3, 2, 1, 5]; // should return 10 units
-var valley5 = [5, 1, 2, 3, 4, 5]; // should return 10 units
+//   function searchHelper(array, z) {
+//     for (var i = 0; i < array.length; i++) {
+//       if (array[i] === target) {
+//         depth = z;
+//         return;
+//       } else if (Array.isArray(array[i])) {
+//         searchHelper(array[i], z + 1);
+//       }
+//     };
+//   }
 
-// additional valleys for testing (mostly edge cases):
-var valley6 = [5]; // should return 0 units
-var valley7 = [5, 3]; // should return 0 units
-var valley8 = [5, 4, 7]; // should return 1 unit
-var valley9 = [5, 1, 7]; // should return 4 units
-var valley10 = [9, 8, 7, 6, 4, 4, 6, 7, 8, 9]; // should return 22 units
+//   searchHelper(input, 0);
+//   return depth;
 
-var valley11 = [2,3,2,3,10,9,8,7,6,5,6,7,4,3,2,3,10,1,10,2]; // should return 50
+// }
+
+function howDeep(array, target, depth = 0) {
+  return array.reduce((combined, current) => {
+    if (Array.isArray(current)) {
+      return combined.concat(howDeep(current, target, depth + 1));
+    } else if (current === target) {
+      return combined.concat(depth)
+    } else {
+      return combined;
+    }
+  }, []);
+};
+
+let myNestedArray = [ 1,
+  [ 2, 'coding is fun!', 3, 4, true ],
+  [ true, false, "xxxxx",
+    [ 3, 4, 5,
+      [ 4, 5, 6, 7,
+        [1, 2, 3, 'coding is fun!']
+      ]
+    ]
+  ],
+  [
+    2, 3, 4, 5, 6, 7, 8, 100000
+  ]
+];
 
 console.clear();
+//console.log(howDeep(myNestedArray, 'coding is fun!'));
 
-// run tests:
-// console.log('Example:',  valleyFlood(example)); // 6
-// console.log('Valley 1:', valleyFlood(valley1)); // 7
-// console.log('Valley 2:', valleyFlood(valley2)); // 20
-// console.log('Valley 3:', valleyFlood(valley3)); // 1
-// console.log('Valley 4:', valleyFlood(valley4)); // 10
-// console.log('Valley 5:', valleyFlood(valley5)); // 10
-// console.log('Valley 6:', valleyFlood(valley6)); // 0
-// console.log('Valley 7:', valleyFlood(valley7)); // 0
-// console.log('Valley 8:', valleyFlood(valley8)); // 1
-// console.log('Valley 9:', valleyFlood(valley9)); // 4
-// console.log('Valley 10:', valleyFlood(valley10)); // 22
-console.log('Valley 11:', valleyFlood(valley11)); // 52
-
-
-
+console.log(latticePaths(10));
 
 
 
