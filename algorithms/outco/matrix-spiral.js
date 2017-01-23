@@ -1,29 +1,3 @@
-
-'use strict';
-
-// performance timer:
-const timeFn = (fn, args) => {
-	let timeStart = performance.now();
-	let result = fn(args);
-	let timeEnd = performance.now();
-	console.log(`${fn.prototype.constructor.name} took ${(timeEnd - timeStart).toFixed(6) * 1000} microseconds to run and returned:`);
-	console.log(result);
-};
-
-function isSorted(arr) {
-	let check = (i) => (i == arr.length - 1) ? true : (arr[i] > arr[i + 1]) ? false : check(i + 1);
-	return check(0);
-};
-
-// generate a random array:
-var R = [];
-(function gen(n = 5) {
-	while (R.length < n) R.push(+(Math.random() * 100).toFixed());
-	return R;
-})(15)
-
-var sorted = (A) => A.sort((a, b) => a - b);
-
 function matrixSpiral(M) {
   
   var top = 0;
@@ -52,8 +26,6 @@ function matrixSpiral(M) {
 
 };
 
-console.clear();
-
 var input = [[1, 2, 3],
              [4, 5, 6],
              [7, 8, 9]];
@@ -66,7 +38,8 @@ var input2 = [[1,  2,  3,  4,  5,  6,  7 ],
               [36, 37, 38, 39, 40, 41, 42],
               [43, 44, 45, 46, 47, 48, 49]];
 
-var answer2 = [1,2,3,4,5,6,7,14,21,28,35,42,49,48,47,46,45,44,43,36,29,22,15,8,9,10,11,12,13,20,27,34,41,40,39,38,37,30,23,16,17,18,19,26,33,32,31,24,25];
+var answer2 = [1,2,3,4,5,6,7,14,21,28,35,42,49,48,47,46,45,44,43,36,29,22,15,8,9,10,
+               11,12,13,20,27,34,41,40,39,38,37,30,23,16,17,18,19,26,33,32,31,24,25];
 
 var result2 = matrixSpiral(input2);
 
@@ -83,19 +56,4 @@ function arrayCheck(array1, array2) {
 };
 
 console.log(arrayCheck(answer2, result2));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
