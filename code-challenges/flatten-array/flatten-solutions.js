@@ -1,21 +1,15 @@
 
 // NOTES: *************************************************************
-/* I provided three solutions to flatten an array, all use recursion.
+
+/* I've provided three solutions to flatten an array, all use recursion.
    Running this file will execute several tests against each function
    and output the results to the console, reporting errors for any
    failing tests.
 
    I think the simplest and most elegant solution is the first, which
    uses a functional approach to reduce the initial array according to
-   the following logic:
-
-   For every element, if it is an array flatten it, otherwise accummulate
-   the element in a new array, which will be returned.
-
-   While this solution is clear and readable, it would be less performant
-   than the other two solutions. If perforamance was a concern, the 2nd
-   function would perform best, operating in linear time complexity and
-   linear space complexity.
+   the following logic: For every element, if it is an array flatten it
+   and accumulate the result, otherwise, just accumulate the current element.
 
    Each function also assumes it will only receive an array as input, some
    more code would be needed if there was a possibility that the input could
@@ -24,7 +18,7 @@
 
 // SOLUTIONS: *************************************************************
 
-// Approach 1: recursive + functional approach using the .reduce method (elegant solution):
+// Approach 1: recursive + functional approach using reduce:
 function flatten1(array) {
   
   return array.reduce((total, current) => {
@@ -39,7 +33,7 @@ function flatten1(array) {
 
 };
 
-// Approach 2: recursive approach using helper method recursion and side effects (most efficient solution);
+// Approach 2: recursive approach using helper method recursion and side effects:
 function flatten2(array) {
 
   var result = [];
@@ -105,7 +99,7 @@ function arrayEquals(array1, array2) {
   }
 }
 
-// array of test cases and solutions:
+// array of test cases and expected results:
 var tests = [
   {
     test: [],
@@ -149,8 +143,7 @@ var tests = [
   },
 ];
 
-// execute tests for all three functions for the above cases/solutions out log result to the console:
-
+// execute tests for all three functions and log results to the console:
 console.log('Starting tests:\n');
 
 tests.forEach((testCase, index) => {
