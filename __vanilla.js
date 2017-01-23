@@ -1,7 +1,7 @@
 
 "use strict";
 
-console.clear();
+//console.clear();
 
 function generatePromiseArray(n) {
 	var promises = [];
