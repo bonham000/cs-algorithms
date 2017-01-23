@@ -25,20 +25,27 @@ var R = [];
 var sorted = (A) => A.sort((a, b) => a - b);
 
 function isToeplitz(matrix) {
+
   var row = 0;
   var left = 0;
+  
   while (left < matrix.length - 1) {
     var expected = matrix[row][left];
     row++;
+  
     while (row < matrix.length) {
       if (expected !== matrix[row][left + 1]) return false;
       expected = matrix[row][left];
       row++;
     }
+
     left++;
     row = 0;
+
   }
+
   return true;
+
 };
 
 function isToeplitzReduce(matrix) {
