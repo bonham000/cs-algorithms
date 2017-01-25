@@ -1,8 +1,6 @@
 
 "use strict";
 
-//console.clear();
-
 function generatePromiseArray(n) {
 	var promises = [];
 	var curr = 0;
@@ -44,6 +42,7 @@ function handleAllPromises(array) {
 	});
 }
 
+// test function
 handleAllPromises(generatePromiseArray(150)).then(res => {
 	console.log('All promises resolved!');
 	res.forEach((data) => console.log(data));
