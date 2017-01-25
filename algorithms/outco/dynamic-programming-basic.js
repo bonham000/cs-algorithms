@@ -44,29 +44,19 @@
  */
 
 function minSteps(n){
-
-    if(n < 0) return;
-    
-    var computed = [0, 0, 1, 1];
-    
-    var min;
-    var current = 4;
-    
-    while (current <= n) {
-        
-        min = computed[current - 1] + 1;
-        
-        if (current % 3 === 0) min = computed[current / 3] + 1;
-
-        if (current % 2 === 0) min = Math.min(min, computed[current / 2] + 1);
-        
-        computed[current] = min;
-        current++;
-        
+    if (n > 0) {
+      var computed = [0, 0, 1, 1];
+      var min;
+      var current = 4;
+      while (current <= n) {
+          min = computed[current - 1] + 1;
+          if (current % 3 === 0) min = computed[current / 3] + 1;
+          if (current % 2 === 0) min = Math.min(min, computed[current / 2] + 1);
+          computed[current] = min;
+          current++;  
+      };
+      return computed[n];
     };
-    
-    return computed[n];
-    
 }
 
 /*
@@ -81,7 +71,9 @@ function minSteps(n){
  */
 
 function bitFlip(arr, n){
-  // YOUR WORK HERE
+
+  // ...
+
 }
 
 
