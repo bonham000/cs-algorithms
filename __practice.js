@@ -76,5 +76,3 @@ var toeplitz = [[3, 4, 5, 6],
 
 console.log(isToeplitz(toeplitz));
 console.log(isToeplitzReduce(toeplitz));
-
-
