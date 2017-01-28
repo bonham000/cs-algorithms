@@ -90,10 +90,3 @@ var board = [
 ];
 
 console.log(exist(board, 'ESEECCBFDASA'));
-
-
-
-
-
-
-
