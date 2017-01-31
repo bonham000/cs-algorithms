@@ -2,11 +2,10 @@
   "name": "draft",
   "version": "1.0.0",
   "description": "",
-  "main": "tree.js",
+  "main": "__practice.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open",
-    "fcc": "webpack-dev-server --config webpack.config.fcc.js --open"
+    "start": "webpack-dev-server --open"
   },
   "keywords": [],
   "author": "",

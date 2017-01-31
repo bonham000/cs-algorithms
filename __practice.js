@@ -24,100 +24,23 @@ var R = [];
 
 var sorted = (A) => A.sort((a, b) => a - b);
 
-var exist = function(board, word) {
-  
-  var found = false;
-	var maxY = board.length;
-	var maxX = board[0].length;
-
-  function explore(y, x, used, compare) {
-
-  	var target = word[compare];
-  	var next = compare++;
-
-  	console.log(y, x, used)
-
-  	var left = (x > 0) ? board[y][x - 1] : undefined;
-  	var right = (x < maxX) ? board[y][x + 1] : undefined;
-  	var up = (y > 0) ? board[y - 1][x] : undefined;
-  	var down = (y < maxY) ? board[y + 1][x] : undefined;
-
-  	var leftID = y.toString() + (x - 1).toString();
-  	var rightID = y.toString() + (x + 1).toString();
-  	var upID = (y - 1).toString() + x.toString();
-  	var downID = (y + 1).toString() + x.toString();
-
-  	if (left && !used[leftID]) {
-  		if (left === target) {
-  			if (next === word.length) {
-  				found = true;
-  				return;
-  			} else {
-  				console.log('going left')
-  				explore(y, x - 1, Object.assign({ [leftID]: true }, used), next);
-  			}
-  		}
-  	}
-  	if (right && !used[rightID]) {
-  		if (right === target) {
-  			if (next === word.length) {
-  				found = true;
-  				return;
-  			} else {
-  				console.log('going right')
-  				explore(y, x + 1, Object.assign({ [rightID]: true }, used), next);
-  			}
-  		}
-  	}
-  	if (up && !used[upID]) {
-  		if (up === target) {
-  			if (next === word.length) {
-  				found = true;
-  				return;
-  			} else {
-  				console.log('going up')
-  				explore(y - 1, x, Object.assign({ [upID]: true }, used), next);
-  			}
-  		}
-  	}
-  	if (down && !used[downID]) {
-  		if (down === target) {
-  			if (next === word.length) {
-  				found = true;
-  				return;
-  			} else {
-  				console.log('going down')
-  				explore(y + 1, x, Object.assign({ [downID]: true }, used), next);
-  			}
-  		}
-  	}
-
-  }
-  
-  for (var i = 0; i < maxY; i++) {
-    for (var j = 0; j < maxX; j++) {
-      if (board[i][j] === word[0]) {
-      	explore(i, j, {}, 1);
+function permutation(str) {
+  var store = [];
+  function permute(s, p = '') {
+    if (p.length === str.length) {
+      store.push(p);
+    } else {
+      for (var i in s) {
+        permute((s.slice(0, i) + s.slice(+i + 1)), p.concat(s[i]));
       }
     }
   }
-
-  return found;
-
-};
-
-var board = [
-  ['A','B','C','E'],
-  ['S','F','C','S'],
-  ['A','D','E','E']
-]
+  permute(str);
+  return store;
+}
 
 console.clear();
-console.log(exist(board, 'ABCE'));
 
-
-
-
-
+console.log(permutation('aaa'));
 
 
