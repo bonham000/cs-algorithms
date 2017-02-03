@@ -1,98 +1,82 @@
 
 "use strict";
 
-/* given a 2D grid of letters and a word, return true if the word can be traced out
-	 by adjacent letters in the grid (without repeating grid spaces), or false otherwise */
+/**
+Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
 
-var exist = function(board, word) {
-  
-  var found = false;
-	var maxY = board.length - 1;
-	var maxX = board[0].length - 1;
+You may assume that the intervals were initially sorted according to their start times.
 
-	// recursively explore paths from starting space outward
-  function explore(x, y, used, compare) {
+Example 1:
+Given intervals [1,3],[6,9], insert and merge [2,5] in as [1,5],[6,9].
 
-  	var target = word[compare];
-  	var next = compare + 1;
+Example 2:
+Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] in as [1,2],[3,10],[12,16].
 
-  	var left = (x > 0) ? board[y][x - 1] : undefined;
-  	var right = (x < maxX) ? board[y][x + 1] : undefined;
-  	var up = (y > 0) ? board[y - 1][x] : undefined;
-  	var down = (y < maxY) ? board[y + 1][x] : undefined;
+This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
+*/
 
-  	var leftID = y.toString() + (x - 1).toString();
-  	var rightID = y.toString() + (x + 1).toString();
-  	var upID = (y - 1).toString() + x.toString();
-  	var downID = (y + 1).toString() + x.toString();
-
-  	if (left && !used[leftID]) {
-  		if (left === target) {
-  			if (next === word.length) {
-  				found = true;
-  				return;
-  			} else {
-  				explore(x - 1, y, Object.assign({ [leftID]: true }, used), next);
-  			}
-  		}
-  	}
-  	if (right && !used[rightID]) {
-  		if (right === target) {
-  			if (next === word.length) {
-  				found = true;
-  				return;
-  			} else {
-  				explore(x + 1, y, Object.assign({ [rightID]: true }, used), next);
-  			}
-  		}
-  	}
-  	if (up && !used[upID]) {
-  		if (up === target) {
-  			if (next === word.length) {
-  				found = true;
-  				return;
-  			} else {
-  				explore(x, y - 1, Object.assign({ [upID]: true }, used), next);
-  			}
-  		}
-  	}
-  	if (down && !used[downID]) {
-  		if (down === target) {
-  			if (next === word.length) {
-  				found = true;
-  				return;
-  			} else {
-  				explore(x, y + 1, Object.assign({ [downID]: true }, used), next);
-  			}
-  		}
-  	}
+var insert = function(intervals, newInterval) {
+    // TODO: solution goes here
+  if (newInterval.start < intervals[0].start && newInterval.end < intervals[0].end) {
+    intervals.unshift(newInterval);
+    return intervals;
   }
-  
-  // iterate through grid and explore any cells that match the first letter of the word
-  for (var i = 0; i <= maxY; i++) {
-    for (var j = 0; j <= maxX; j++) {
-      if (board[i][j] === word[0]) {
-      	if (word.length === 1) return true;
-      	explore(j, i, {}, 1);
-      	if (found) return found;
+  // find location new interval needs to be inserted
+  // begin by iterating through array
+  for (var i = 0; i < intervals.length; i++) {
+      if (intervals[i].start < newInterval.start && newInterval.start < intervals[i].end) {
+          for (var j = i + 1; j <= intervals.length; j++) {
+              if (intervals[j] !== undefined && intervals[j].end > newInterval.end) {
+                  // set the new interval, knowing where it starts and ends
+                  if (j === i + 1) {
+                    intervals[i].end = newInterval.end;
+                  } else if (j <= intervals.length) {
+                    intervals[i].end = intervals[j].end;
+                    intervals.splice(i + 1, j - 1);                    
+                  } else {
+                    // if overlaps past end
+                    intervals[i].end = newInterval.end;
+                    intervals = intervals.slice(0, j);
+                  }
+                  return intervals;
+              }
+          }
       }
-    }
   }
-
-  return false;
-
+  
+  // new interval range doesn't overlap with current, add to end
+  intervals.push(newInterval);
+  return intervals;
+  
 };
 
-var board = [
-  ['A','B','C','E'],
-  ['S','F','C','S'],
-  ['A','D','E','E']
-];
-
-console.log(exist(board, 'ESEECCBFDASA'));
 
 
+// Test data 
+/**
+ * @param {Interval[]} intervals
+ * @param {Interval} newInterval
+ * @return {Interval[]}
+ */ 
+function Interval(start, end) {
+    this.start = start;
+    this.end = end;
+}
 
+var existingIntervals = [new Interval(1,2),new Interval(3,5),new Interval(6,7), new Interval(8,10), new Interval(12,16)];
+var newInterval = new Interval(0, 1);
+
+
+
+// for debugging purposes
+var result = 'error';
+try {
+    result = JSON.stringify(insert(existingIntervals, newInterval));
+} catch (e) {
+    alert(e);
+}
+
+document.getElementById('log').innerHTML = result;
 
 
 
