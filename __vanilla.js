@@ -16,57 +16,52 @@ This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
 */
 
 var insert = function(intervals, newInterval) {
-    // TODO: solution goes here
-  if (newInterval.start < intervals[0].start && newInterval.end < intervals[0].end) {
+
+  if (newInterval.end < intervals[0].start) {
     intervals.unshift(newInterval);
     return intervals;
   }
-  // find location new interval needs to be inserted
-  // begin by iterating through array
+
   for (var i = 0; i < intervals.length; i++) {
-      if (intervals[i].start < newInterval.start && newInterval.start < intervals[i].end) {
-          for (var j = i + 1; j <= intervals.length; j++) {
-              if (intervals[j] !== undefined && intervals[j].end > newInterval.end) {
-                  // set the new interval, knowing where it starts and ends
-                  if (j === i + 1) {
-                    intervals[i].end = newInterval.end;
-                  } else if (j <= intervals.length) {
-                    intervals[i].end = intervals[j].end;
-                    intervals.splice(i + 1, j - 1);                    
-                  } else {
-                    // if overlaps past end
-                    intervals[i].end = newInterval.end;
-                    intervals = intervals.slice(0, j);
-                  }
-                  return intervals;
-              }
+
+    if (newInterval.start > intervals[i].end && intervals[i + 1] && newInterval.end < intervals[i + 1].start) {
+      intervals.splice(i + 1, 0, newInterval);
+      return intervals;
+    }
+
+    if (newInterval.start > intervals[i].start && newInterval.start < intervals[i].end) {
+      if (newInterval.end < intervals[i].end) {
+        return intervals;
+      } else {
+        for (var j = i + 1; j < intervals.length; j++) {
+          if (newInterval.end < intervals[j].start) {
+            intervals[i].end = newInterval.end;
+            intervals.splice(i + 1, j - i - 1);
+            return intervals;
+          } else if (newInterval.end < intervals[j].end) {
+            intervals[i].end = intervals[j].end;
+            intervals.splice(i + 1, j - i);
+            return intervals;
           }
+        }
       }
+    }
+
   }
-  
-  // new interval range doesn't overlap with current, add to end
+
   intervals.push(newInterval);
   return intervals;
-  
+
 };
 
-
-
 // Test data 
-/**
- * @param {Interval[]} intervals
- * @param {Interval} newInterval
- * @return {Interval[]}
- */ 
 function Interval(start, end) {
     this.start = start;
     this.end = end;
 }
 
-var existingIntervals = [new Interval(1,2),new Interval(3,5),new Interval(6,7), new Interval(8,10), new Interval(12,16)];
-var newInterval = new Interval(0, 1);
-
-
+var existingIntervals = [ new Interval(1,2), new Interval(3,5), new Interval(6,8), new Interval(9,10), new Interval(12,16)];
+var newInterval = new Interval(4,7);
 
 // for debugging purposes
 var result = 'error';
