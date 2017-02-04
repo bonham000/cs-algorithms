@@ -1,4 +1,3 @@
-
 "use strict";
 
 /**
@@ -75,24 +74,44 @@ var insert = function(intervals, newInterval) {
 
 };
 
-// Test data 
+// Interval Object 
 function Interval(start, end) {
-    this.start = start;
-    this.end = end;
+  this.start = start;
+  this.end = end;
 }
 
-var existingIntervals = [new Interval(3,5), new Interval(9,11), new Interval(14,16)];
-var newInterval = new Interval(6,10);
+// Initial Input Array
+var intervals = [new Interval(3,5), new Interval(9,11), new Interval(14,16)];
 
-// for debugging purposes
-var result = 'error';
-try {
-    result = JSON.stringify(insert(existingIntervals, newInterval));
-} catch (e) {
-    alert(e);
+// Test Case Intervals
+var before = new Interval(1,2);
+var after = new Interval(20, 25);
+var middle = new Interval(6, 7);
+var overlap1 = new Interval(4, 8);
+var overlap2 = new Interval(4, 10);
+var overlap3 = new Interval(4, 18);
+var overlap4 = new Interval(6, 12);
+var overlap5 = new Interval(6, 10);
+var overlap6 = new Interval(6, 20);
+var wrap = new Interval(1, 25);
+
+// Test Function
+function testIntervals(interval) {
+  document.getElementById('log').innerHTML += '<b>Insert:</b> ' + JSON.stringify(interval);
+  document.getElementById('log').innerHTML += '<br>';
+  document.getElementById('log').innerHTML += '<b>Intervals:</b> ' + JSON.stringify(intervals);  
+  document.getElementById('log').innerHTML += '<br><br>';
+  document.getElementById('log').innerHTML += '<b>Result:</b> ' + JSON.stringify(insert(intervals, interval));
 }
 
-document.getElementById('log').innerHTML = result;
+// Run Tests
+testIntervals(after);
+
+
+
+
+
+
 
 
 
