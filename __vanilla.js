@@ -66,10 +66,13 @@ var insert = function(intervals, newInterval) {
       intervals.push(newInterval);
       return intervals;
     }
-
   }
 
-  intervals.push(newInterval);
+  if (newInterval.end > intervals[intervals.length - 1].end) {
+    intervals = newInterval;
+  } else {
+    intervals.push(newInterval);
+  }
   return intervals;
 
 };
@@ -99,13 +102,13 @@ var wrap = new Interval(1, 25);
 function testIntervals(interval) {
   document.getElementById('log').innerHTML += '<b>Insert:</b> ' + JSON.stringify(interval);
   document.getElementById('log').innerHTML += '<br>';
-  document.getElementById('log').innerHTML += '<b>Intervals:</b> ' + JSON.stringify(intervals);  
+  document.getElementById('log').innerHTML += '<b>Intervals:</b> ' + JSON.stringify(intervals); 
   document.getElementById('log').innerHTML += '<br><br>';
   document.getElementById('log').innerHTML += '<b>Result:</b> ' + JSON.stringify(insert(intervals, interval));
 }
 
 // Run Tests
-testIntervals(after);
+testIntervals(wrap);
 
 
 
