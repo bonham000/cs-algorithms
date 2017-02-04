@@ -44,7 +44,28 @@ var insert = function(intervals, newInterval) {
             return intervals;
           }
         }
+        intervals[i].end = newInterval.end;
+        intervals = intervals.slice(0, i + 1);
+        return intervals;
       }
+    }
+
+    if (i > 0 && newInterval.start > intervals[i - 1].end && newInterval.start < intervals[i].start) {
+      for (var j = i; j < intervals.length; j++) {
+        if (newInterval.end < intervals[j].start) {
+          intervals.splice(i - 1, j - i - 1);
+          intervals.splice(i, 1, newInterval);
+          return intervals;
+        } else if (newInterval.end < intervals[j].end) {
+          newInterval.end = intervals[j].end;
+          intervals.splice(i - 1, j - i - 1);
+          intervals.splice(i, 1, newInterval);
+          return intervals;          
+        }
+      }
+      intervals.splice(i, intervals.length - i);
+      intervals.push(newInterval);
+      return intervals;
     }
 
   }
@@ -60,8 +81,8 @@ function Interval(start, end) {
     this.end = end;
 }
 
-var existingIntervals = [ new Interval(1,2), new Interval(3,5), new Interval(6,8), new Interval(9,10), new Interval(12,16)];
-var newInterval = new Interval(4,7);
+var existingIntervals = [new Interval(3,5), new Interval(9,11), new Interval(14,16)];
+var newInterval = new Interval(6,10);
 
 // for debugging purposes
 var result = 'error';
