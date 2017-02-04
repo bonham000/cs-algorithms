@@ -1,118 +1,106 @@
 "use strict";
 
-/**
-Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
-
-You may assume that the intervals were initially sorted according to their start times.
-
-Example 1:
-Given intervals [1,3],[6,9], insert and merge [2,5] in as [1,5],[6,9].
-
-Example 2:
-Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] in as [1,2],[3,10],[12,16].
-
-This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
-*/
-
-var insert = function(intervals, newInterval) {
-
-  if (newInterval.end < intervals[0].start) {
-    intervals.unshift(newInterval);
-    return intervals;
-  }
-
-  for (var i = 0; i < intervals.length; i++) {
-
-    if (newInterval.start > intervals[i].end && intervals[i + 1] && newInterval.end < intervals[i + 1].start) {
-      intervals.splice(i + 1, 0, newInterval);
-      return intervals;
-    }
-
-    if (newInterval.start > intervals[i].start && newInterval.start < intervals[i].end) {
-      if (newInterval.end < intervals[i].end) {
-        return intervals;
-      } else {
-        for (var j = i + 1; j < intervals.length; j++) {
-          if (newInterval.end < intervals[j].start) {
-            intervals[i].end = newInterval.end;
-            intervals.splice(i + 1, j - i - 1);
-            return intervals;
-          } else if (newInterval.end < intervals[j].end) {
-            intervals[i].end = intervals[j].end;
-            intervals.splice(i + 1, j - i);
-            return intervals;
-          }
-        }
-        intervals[i].end = newInterval.end;
-        intervals = intervals.slice(0, i + 1);
-        return intervals;
-      }
-    }
-
-    if (i > 0 && newInterval.start > intervals[i - 1].end && newInterval.start < intervals[i].start) {
-      for (var j = i; j < intervals.length; j++) {
-        if (newInterval.end < intervals[j].start) {
-          intervals.splice(i - 1, j - i - 1);
-          intervals.splice(i, 1, newInterval);
-          return intervals;
-        } else if (newInterval.end < intervals[j].end) {
-          newInterval.end = intervals[j].end;
-          intervals.splice(i - 1, j - i - 1);
-          intervals.splice(i, 1, newInterval);
-          return intervals;          
-        }
-      }
-      intervals.splice(i, intervals.length - i);
-      intervals.push(newInterval);
-      return intervals;
-    }
-  }
-
-  if (newInterval.end > intervals[intervals.length - 1].end) {
-    intervals = newInterval;
-  } else {
-    intervals.push(newInterval);
-  }
-  return intervals;
-
-};
-
-// Interval Object 
-function Interval(start, end) {
-  this.start = start;
-  this.end = end;
+function Node(val) {
+  this.val = val;
+  this.left = null;
+  this.right = null;
 }
 
-// Initial Input Array
-var intervals = [new Interval(3,5), new Interval(9,11), new Interval(14,16)];
-
-// Test Case Intervals
-var before = new Interval(1,2);
-var after = new Interval(20, 25);
-var middle = new Interval(6, 7);
-var overlap1 = new Interval(4, 8);
-var overlap2 = new Interval(4, 10);
-var overlap3 = new Interval(4, 18);
-var overlap4 = new Interval(6, 12);
-var overlap5 = new Interval(6, 10);
-var overlap6 = new Interval(6, 20);
-var wrap = new Interval(1, 25);
-
-// Test Function
-function testIntervals(interval) {
-  document.getElementById('log').innerHTML += '<b>Insert:</b> ' + JSON.stringify(interval);
-  document.getElementById('log').innerHTML += '<br>';
-  document.getElementById('log').innerHTML += '<b>Intervals:</b> ' + JSON.stringify(intervals); 
-  document.getElementById('log').innerHTML += '<br><br>';
-  document.getElementById('log').innerHTML += '<b>Result:</b> ' + JSON.stringify(insert(intervals, interval));
+function BinaryTree() {
+  this.root = null;
+  this.getMaxDepth = function() {
+    function dig(node) {
+      if (!node) {
+        return -1;
+      }
+      return Math.max(dig(node.left), dig(node.right)) + 1;
+    }
+    return dig(this.root);
+  }
+  this.last = null;
+  this.addUnbalanced = function(val) {
+    var add = new Node(val);
+    if (!this.root) {
+      this.root = add;
+      this.last = add;
+    } else {
+      var last = this.last;
+      last.right = add;
+      this.last = add;
+    }
+  }
+  this.add = function(val) {
+    if (!this.root) {
+      this.root = new Node(val);
+      this.height++;
+    } else {
+      var Q = [this.root];
+      while (Q.length > 0) {
+        var current = Q.shift();
+        if (!current.left) {
+          current.left = new Node(val);
+          break;
+        } else if (!current.right) {
+          current.right = new Node(val);
+          break;
+        }
+        if (current.left) Q.push(current.left);
+        if (current.right) Q.push(current.right);
+      }
+    }
+  }
 }
 
-// Run Tests
-testIntervals(wrap);
+function File() {
+  var data = [];
+  this.write = function(value) {
+    data.push(value);
+  }
+  this.read = function() {
+    var tree = new BinaryTree();
+    for (var element of data) {
+      tree.addUnbalanced(element);
+    };
+    return tree.root;
+  }
+  this.print = function() {
+    console.log(JSON.stringify(data));
+  }
+}
 
+function writeTree(tree) {
 
+  var Q = [];
+  Q.push({depth: 0, node: tree.root});
 
+  while (Q.length > 0) {
+    var current = Q.shift();
+    if (current.depth > tree.getMaxDepth()) break;
+    file.write(current.node.val);
+    if (current.node.left) {
+      Q.push({depth: current.depth + 1, node: current.node.left});
+    } else {
+      Q.push({depth: current.depth + 1, node: {val: null}});
+    }
+    if (current.node.right) {
+      Q.push({depth: current.depth + 1, node: current.node.right});
+    } else {
+      Q.push({depth: current.depth + 1, node: {val: null}});
+    }
 
+  }
+
+}
+
+var file = new File();
+var tree = new BinaryTree();
+var nodes = [5, 2, 3, 4, 5, 6, 7, 8];
+nodes.forEach(node => tree.addUnbalanced(node));
+console.log(tree);
+writeTree(tree);
+console.log('Max Depth: ' + tree.getMaxDepth());
+file.print();
+console.log(file.read());
 
 
 
