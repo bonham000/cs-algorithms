@@ -1,19 +1,7 @@
 
-class Package {
-  constructor(name, dependencies) {
-    this.name = name;
-    this.dependencies = dependencies;
-  }
-};
+// how to install npm package dependencies?
 
-var packages = [
-  new Package('React', ['babel', 'react-dom']),
-  new Package('App', ['React']),
-  new Package('babel', []),
-  new Package('react-dom', []),
-];
-
-function install(packages, installed = []) {
+function install_1(packages, installed = []) {
 
   for (var i = 0; i < packages.length; ) {
 
@@ -35,13 +23,13 @@ function install(packages, installed = []) {
 
   }
 
-  if (packages.length > 0) install(packages, installed);
+  if (packages.length > 0) install_1(packages, installed);
 
   return installed;
 
-}
+};
 
-function install2(packages) {
+function install_2(packages) {
 
   var installed = new Set();
   
@@ -72,10 +60,29 @@ function install2(packages) {
 
   helper(packages, 0);
 
-  return installed.values()
-  
-  
-}
+  var order = [];
 
-// console.log(install(packages));
-// console.log(install2(packages));
+  installed.forEach(val => order.push(val));
+
+  return order;
+  
+};
+
+class Package {
+  constructor(name, dependencies) {
+    this.name = name;
+    this.dependencies = dependencies;
+  }
+};
+
+var packages_1 = [
+  new Package('React', ['babel', 'react-dom']),
+  new Package('App', ['React']),
+  new Package('babel', []),
+  new Package('react-dom', []),
+];
+
+var packages_2 = JSON.parse(JSON.stringify(packages_1));
+
+console.log(install_1(packages_1));
+console.log(install_2(packages_2));

@@ -1,107 +1,88 @@
-"use strict";
 
-function Node(val) {
-  this.val = val;
-  this.left = null;
-  this.right = null;
-}
+// how to install npm package dependencies?
 
-function BinaryTree() {
-  this.root = null;
-  this.getMaxDepth = function() {
-    function dig(node) {
-      if (!node) {
-        return -1;
-      }
-      return Math.max(dig(node.left), dig(node.right)) + 1;
-    }
-    return dig(this.root);
-  }
-  this.last = null;
-  this.addUnbalanced = function(val) {
-    var add = new Node(val);
-    if (!this.root) {
-      this.root = add;
-      this.last = add;
+function install_1(packages, installed = []) {
+
+  for (var i = 0; i < packages.length; ) {
+
+    if (packages[i].dependencies.length === 0) {
+      installed.push(packages[i].name);
+      packages.splice(i, 1);
+      continue;
     } else {
-      var last = this.last;
-      last.right = add;
-      this.last = add;
-    }
-  }
-  this.add = function(val) {
-    if (!this.root) {
-      this.root = new Node(val);
-      this.height++;
-    } else {
-      var Q = [this.root];
-      while (Q.length > 0) {
-        var current = Q.shift();
-        if (!current.left) {
-          current.left = new Node(val);
-          break;
-        } else if (!current.right) {
-          current.right = new Node(val);
-          break;
+      for (var j = 0; j < packages[i].dependencies.length; ) {
+        if (installed.indexOf(packages[i].dependencies[j]) !== -1) {
+          packages[i].dependencies.splice(j, 1);
+          continue;
+        } else {
+          j++;
         }
-        if (current.left) Q.push(current.left);
-        if (current.right) Q.push(current.right);
+      }
+      i++;
+    }
+
+  }
+
+  if (packages.length > 0) install_1(packages, installed);
+
+  return installed;
+
+};
+
+function install_2(packages) {
+
+  var installed = new Set();
+  
+  function checkPackage(pkg) {
+    for (var module of pkg) {
+      if (!installed.has(module)) {
+        return false;
       }
     }
+    return true;
   }
-}
-
-function File() {
-  var data = [];
-  this.write = function(value) {
-    data.push(value);
-  }
-  this.read = function() {
-    var tree = new BinaryTree();
-    for (var element of data) {
-      tree.addUnbalanced(element);
-    };
-    return tree.root;
-  }
-  this.print = function() {
-    console.log(JSON.stringify(data));
-  }
-}
-
-function writeTree(tree) {
-
-  var Q = [];
-  Q.push({depth: 0, node: tree.root});
-
-  while (Q.length > 0) {
-    var current = Q.shift();
-    if (current.depth > tree.getMaxDepth()) break;
-    file.write(current.node.val);
-    if (current.node.left) {
-      Q.push({depth: current.depth + 1, node: current.node.left});
+  
+  function helper(modules, current) {
+    
+    if (modules[current].dependencies.length === 0 || checkPackage(modules[current].dependencies)) {
+      installed.add(modules[current].name);
+      modules.splice(current, 1);
+      if (current === modules.length) {
+        current = 0;
+      }
     } else {
-      Q.push({depth: current.depth + 1, node: {val: null}});
+      current = (current === modules.length - 1) ? 0 : current + 1;
     }
-    if (current.node.right) {
-      Q.push({depth: current.depth + 1, node: current.node.right});
-    } else {
-      Q.push({depth: current.depth + 1, node: {val: null}});
-    }
-
+  
+    if (modules.length > 0) helper(modules, current);
+    
   }
 
-}
+  helper(packages, 0);
 
-var file = new File();
-var tree = new BinaryTree();
-var nodes = [5, 2, 3, 4, 5, 6, 7, 8];
-nodes.forEach(node => tree.addUnbalanced(node));
+  var order = [];
 
-writeTree(tree);
-console.log(file.read());
+  installed.forEach(val => order.push(val));
 
+  return order;
+  
+};
 
+class Package {
+  constructor(name, dependencies) {
+    this.name = name;
+    this.dependencies = dependencies;
+  }
+};
 
+var packages_1 = [
+  new Package('React', ['babel', 'react-dom']),
+  new Package('App', ['React']),
+  new Package('babel', []),
+  new Package('react-dom', []),
+];
 
+var packages_2 = JSON.parse(JSON.stringify(packages_1));
 
-
+console.log(install_1(packages_1));
+console.log(install_2(packages_2));
