@@ -24,23 +24,21 @@ var R = [];
 
 var sorted = (A) => A.sort((a, b) => a - b);
 
-function permutation(str) {
-  var store = [];
-  function permute(s, p = '') {
-    if (p.length === str.length) {
-      store.push(p);
-    } else {
-      for (var i in s) {
-        permute((s.slice(0, i) + s.slice(+i + 1)), p.concat(s[i]));
-      }
-    }
-  }
-  permute(str);
-  return store;
-}
-
 console.clear();
 
-console.log(permutation('aaa'));
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+  wide() {
+      return 5;
+  }
+  tall = () => {
+    return 15
+  }
+}
 
+var R = new Rectangle();
+console.log(R.tall());
 
