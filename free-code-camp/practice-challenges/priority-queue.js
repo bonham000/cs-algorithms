@@ -29,7 +29,7 @@ function PriorityQueue () {
     };
     this.dequeue = function() {
     	if (collection.length > 0) {
-    		return collection.shift();
+    		return collection.shift()[0];
     	} else {
     		return 'The queue is empty.'
     	}
